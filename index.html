@@ -1,47 +1,567 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skillet</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Skillet - Banda Oficial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h1, h2, h3 {
+            color: #e10600;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #111;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e10600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #e10600;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+                        
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+        
+        .hero-content p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #e10600;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #b30500;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(225, 6, 0, 0.4);
+        }
+        
+        /* About Section */
+        .about {
+            background-color: #111;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #e10600;
+            margin: 10px auto;
+        }
+        
+        /* Members Section */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .member-card {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .member-img {
+            height: 250px;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: #e10600;
+        }
+        
+        .member-info {
+            padding: 20px;
+        }
+        
+        /* Discography Section */
+        .discography {
+            background-color: #111;
+        }
+        
+        .albums-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .album-card {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .album-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .album-cover {
+            height: 200px;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #e10600;
+        }
+        
+        .album-info {
+            padding: 15px;
+        }
+        
+        /* Top Songs Section */
+        .songs-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .song-item {
+            background-color: #1a1a1a;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .song-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .song-header {
+            background-color: #e10600;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .song-content {
+            padding: 20px;
+            display: none;
+        }
+        
+        .song-item.active .song-content {
+            display: block;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #111;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            color: white;
+            border-radius: 50%;
+            margin: 0 10px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background-color: #e10600;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+            }
+            
+            .nav-links li {
+                margin: 0 10px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
- <h1>Skillet</h1>
-    
- <p>Skillet es una banda de rock cristiano y metal cristiano originaria de Tennessee, fundada en 1996 y conformada por John y Korey Cooper, Seth Morrison y Jen Ledger. El grupo ha publicado Doce álbumes de estudio, el más reciente, Revolution, en el 2024. Dos de sus discos, Collide y Comatose recibieron nominación al Grammy.El sonido de la banda se ha descrito como rock alternativo, hard rock, y rock sinfónico, y ha sido caracterizada por elementos electrónicos.</p>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">SKILLET</div>
+                <ul class="nav-links">
+                    <li><a href="#about">Inicio</a></li>
+                    <li><a href="#members">Miembros</a></li>
+                    <li><a href="#discography">Discografía</a></li>
+                    <li><a href="#songs">Canciones</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<h2>Miembros</h2>
-<ul>
-<li><p>John Cooper</p></li>
-<li><p>Korey Cooper</p></li>
-<li><p>Jen Ledger</p></li>
-<li><p>Seth Morrison</p></li>
-</ul>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>SKILLET</h1>
+                <p>Música que inspira y transforma</p>
+                <a href="#discography" class="btn">Escuchar Música</a>
+            </div>
+        </div>
+    </section>
 
-<h2>Albunes</h2>
-<ul>
-    <li><p>Skillet</p></li>
-    <li><p>Comatose</p></li>
-    <li><p>Awake</p></li>
-    <li><p>Awake</p></li>
-    <li><p>Rise</p></li>
-    <li><p>Revolution</p></li>
-    <li><p>Victorious</p></li>
-    <li><p>Invincible</p></li>
-    <li><p>Domain</p></li>
-    <li><p>Collide</p></li>
-    <li><p>Unleashed</p></li>
-    <li><p>Almost Awake</p></li>
-    <li><p>¡Tunes Session</p></li>
-    <li><p>Barely Awake</p></li>
-    <li><p>The platinum collection</p></li>
-    <li><p>The older I get EP</p></li>
-    <li><p>Awake and Remixed</p></li>
-    <li><p>The Early Years</p></li>
-    <li><p>Comatose / Awake</p></li>
-    <li><p>Vital Signs</p></li>
-    çfnndgng
-    </ul>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre Skillet</h2>
+            <p>Skillet es una banda de rock cristiano y metal cristiano originaria de Tennessee, fundada en 1996 y conformada por John y Korey Cooper, Seth Morrison y Jen Ledger. El grupo ha publicado Doce álbumes de estudio, el más reciente, Revolution, en el 2024. Dos de sus discos, Collide y Comatose recibieron nominación al Grammy.</p>
+            <p>El sonido de la banda se ha descrito como rock alternativo, hard rock, y rock sinfónico, y ha sido caracterizada por elementos electrónicos.</p>
+        </div>
+    </section>
+
+    <!-- Members Section -->
+    <section id="members" class="members">
+        <div class="container">
+            <h2 class="section-title">Miembros</h2>
+            <div class="members-grid">
+                <div class="member-card">
+                    <div class="member-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>John Cooper</h3>
+                        <p>Vocalista y bajista</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Korey Cooper</h3>
+                        <p>Guitarrista y tecladista</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Jen Ledger</h3>
+                        <p>Baterista y vocalista</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-img">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Seth Morrison</h3>
+                        <p>Guitarrista principal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discography Section -->
+    <section id="discography" class="discography">
+        <div class="container">
+            <h2 class="section-title">Discografía</h2>
+            <div class="albums-grid">
+                <div class="album-card">
+                    <div class="album-cover">
+                        <i class="fas fa-compact-disc"></i>
+                    </div>
+                    <div class="album-info">
+                        <h3>Skillet</h3>
+                        <p>1996</p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <div class="album-cover">
+                        <i class="fas fa-compact-disc"></i>
+                    </div>
+                    <div class="album-info">
+                        <h3>Comatose</h3>
+                        <p>2006</p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <div class="album-cover">
+                        <i class="fas fa-compact-disc"></i>
+                    </div>
+                    <div class="album-info">
+                        <h3>Awake</h3>
+                        <p>2009</p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <div class="album-cover">
+                        <i class="fas fa-compact-disc"></i>
+                    </div>
+                    <div class="album-info">
+                        <h3>Rise</h3>
+                        <p>2013</p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <div class="album-cover">
+                        <i class="fas fa-compact-disc"></i>
+                    </div>
+                    <div class="album-info">
+                        <h3>Unleashed</h3>
+                        <p>2016</p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <div class="album-cover">
+                        <i class="fas fa-compact-disc"></i>
+                    </div>
+                    <div class="album-info">
+                        <h3>Victorious</h3>
+                        <p>2019</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Songs Section -->
+    <section id="songs" class="songs">
+        <div class="container">
+            <h2 class="section-title">Top Canciones de Skillet</h2>
+            <div class="songs-list">
+                <div class="song-item">
+                    <div class="song-header">
+                        <h3>1. Monster</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="song-content">
+                        <p>La canción fue publicada como sencillo el 14 de julio de 2009 ocupando importantes lugares en las listas de éxitos. Por un lado, llegó al #4 tanto en el Conteo Activo de Rock, como en el Mainstream Rock, y por el otro, se convirtió en el primer sencillo del grupo en ingresar a la Lista Alternativa de Billboard, ocupando el puesto 28.</p>
+                    </div>
+                </div>
+                <div class="song-item">
+                    <div class="song-header">
+                        <h3>2. Hero</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="song-content">
+                        <p>Se publicó como sencillo el 19 de mayo de 2009. La canción marcó el inicio de un gran suceso comercial que Skillet experimentaría con el álbum Awake. «Hero» ocupó el #1 en el Listado de Canciones Cristianas Contemporáneas de Billboard, y el #1 en la lista de Rock Cristiano.</p>
+                    </div>
+                </div>
+                <div class="song-item">
+                    <div class="song-header">
+                        <h3>3. Feel Invincible</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="song-content">
+                        <p>Fue lanzado como primer sencillo del noveno disco de la banda, Unleashed. La canción llegó al #1 de la lista de Rock Cristiano, y se convirtió en el primer sencillo de Skillet en llegar a lo más alto del listado Mejores Canciones Cristanas de Billboard. «Feel Invincible» habla acerca de cómo el poder de Dios nos hace sentir invencibles.</p>
+                    </div>
+                </div>
+                <div class="song-item">
+                    <div class="song-header">
+                        <h3>4. Awake and Alive</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="song-content">
+                        <p>Producida por Howard Benson, «Awake and Alive» se lanzó el 15 de febrero de 2010 como tercer sencillo de Awake. La canción ocupó el puesto #3 del Listado Principal de Canciones Cristianas de Billboard, y llegó al número 13 de la Lista de Rock Alternativo. Al referirse al significado del tema, Cooper comentó: «Aunque sientas que todos los que te rodean están tratando de quitarte la esperanza, nadie tiene derecho de hacer eso y no debes permitir que esas influencias negativas te agobien. Vive lo que crees y no tengas miedo de defender tu fe».</p>
+                    </div>
+                </div>
+                <div class="song-item">
+                    <div class="song-header">
+                        <h3>5. Whisper in the Dark</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="song-content">
+                        <p>Hay momentos en las que las circunstancias difíciles de la vida nos hacen sentir como si todo a nuestro alrededor estuviera oscuro. Y aunque pareciera que estamos solos en las pruebas, es bueno saber que Dios siempre esta a nuestro lado para pelear nuestras batallas; por lo menos esto es lo que buscó plasmar John Cooper al escribir «Whispers in the Dark». La canción fue #1 en la Lista de Rock Cristiano de Billboard, y ocupó el puesto 37 en el Mainstream Rock, obteniendo el Disco de Platino por sus ventas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-spotify"></i></a>
+            </div>
+            <p class="copyright">&copy; 2023 Skillet. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script para las canciones desplegables
+        document.querySelectorAll('.song-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const songItem = header.parentElement;
+                songItem.classList.toggle('active');
+                
+                const icon = header.querySelector('i');
+                if (songItem.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+        
+        // Smooth scrolling para los enlaces del menú
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
