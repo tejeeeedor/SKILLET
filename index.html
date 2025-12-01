@@ -86,7 +86,7 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+                        url('https://i.scdn.co/image/ab67616d0000b2735d3963ed253465edbed6f7d1');
             background-size: cover;
             background-position: center;
             height: 80vh;
@@ -124,6 +124,15 @@
             background-color: #b30500;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(225, 6, 0, 0.4);
+        }
+        
+        .btn-store {
+            background-color: #333;
+            margin-left: 10px;
+        }
+        
+        .btn-store:hover {
+            background-color: #444;
         }
         
         /* About Section */
@@ -167,12 +176,20 @@
         
         .member-img {
             height: 250px;
-            background-color: #333;
+            background-color: #333; /* Fondo de fallback */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 60px;
-            color: #e10600;
+            font-size: 60px; /* Tamaño del icono de fallback */
+            color: #e10600; /* Color del icono de fallback */
+            overflow: hidden; /* Asegurar que la imagen no se desborde */
+        }
+
+        .member-img img { /* Estilo para las imágenes de los miembros */
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Recortar la imagen para que cubra el espacio */
+            display: block; /* Eliminar espacio extra debajo de la imagen */
         }
         
         .member-info {
@@ -203,16 +220,42 @@
         
         .album-cover {
             height: 200px;
-            background-color: #333;
+            background-color: #333; /* Fondo de fallback */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            color: #e10600;
+            font-size: 40px; /* Tamaño del icono de fallback */
+            color: #e10600; /* Color del icono de fallback */
+            overflow: hidden;
+        }
+
+        .album-cover img { /* Estilo para las portadas de los álbumes */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         
         .album-info {
             padding: 15px;
+        }
+        
+        /* Store Preview Section */
+        .store-preview {
+            background-color: #111;
+            text-align: center;
+        }
+        
+        .store-preview h2 {
+            margin-bottom: 40px;
+        }
+        
+        .store-cta {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         /* Top Songs Section */
@@ -234,12 +277,33 @@
         }
         
         .song-header {
-            background-color: #e10600;
+            background-color: #e10600; /* Fondo de fallback */
             padding: 15px 20px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative; /* Necesario para la imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            min-height: 80px; /* Para que la imagen se vea bien si no hay texto */
+            color: white; /* Para que el texto sea legible sobre la imagen */
+        }
+
+        .song-header::before { /* Capa oscura para que el texto sea legible */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Opacidad de 50% */
+            z-index: 1;
+        }
+
+        .song-header h3, .song-header i {
+            position: relative;
+            z-index: 2; /* Asegurar que el texto y el icono estén por encima de la capa oscura */
         }
         
         .song-content {
@@ -310,11 +374,20 @@
             .hero-content p {
                 font-size: 1.2rem;
             }
+            
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .hero-buttons .btn {
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <nav class="navbar">
@@ -324,24 +397,26 @@
                     <li><a href="#members">Miembros</a></li>
                     <li><a href="#discography">Discografía</a></li>
                     <li><a href="#songs">Canciones</a></li>
+                    <li><a href="tienda.html" target="_blank">Tienda</a></li>
                     <li><a href="#contact">Contacto</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <h1>SKILLET</h1>
                 <p>Música que inspira y transforma</p>
-                <a href="#discography" class="btn">Escuchar Música</a>
+                <div class="hero-buttons">
+                    <a href="#discography" class="btn">Escuchar Música</a>
+                    <a href="tienda.html" target="_blank" class="btn btn-store">Visitar Tienda</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
             <h2 class="section-title">Sobre Skillet</h2>
@@ -350,14 +425,13 @@
         </div>
     </section>
 
-    <!-- Members Section -->
     <section id="members" class="members">
         <div class="container">
             <h2 class="section-title">Miembros</h2>
             <div class="members-grid">
                 <div class="member-card">
                     <div class="member-img">
-                        <i class="fas fa-user"></i>
+                        <img src="https://example.com/john-cooper.jpg" alt="Foto de John Cooper">
                     </div>
                     <div class="member-info">
                         <h3>John Cooper</h3>
@@ -366,7 +440,7 @@
                 </div>
                 <div class="member-card">
                     <div class="member-img">
-                        <i class="fas fa-user"></i>
+                        <img src="https://example.com/korey-cooper.jpg" alt="Foto de Korey Cooper">
                     </div>
                     <div class="member-info">
                         <h3>Korey Cooper</h3>
@@ -375,7 +449,7 @@
                 </div>
                 <div class="member-card">
                     <div class="member-img">
-                        <i class="fas fa-user"></i>
+                        <img src="https://example.com/jen-ledger.jpg" alt="Foto de Jen Ledger">
                     </div>
                     <div class="member-info">
                         <h3>Jen Ledger</h3>
@@ -384,7 +458,7 @@
                 </div>
                 <div class="member-card">
                     <div class="member-img">
-                        <i class="fas fa-user"></i>
+                        <img src="https://example.com/seth-morrison.jpg" alt="Foto de Seth Morrison">
                     </div>
                     <div class="member-info">
                         <h3>Seth Morrison</h3>
@@ -395,14 +469,13 @@
         </div>
     </section>
 
-    <!-- Discography Section -->
     <section id="discography" class="discography">
         <div class="container">
             <h2 class="section-title">Discografía</h2>
             <div class="albums-grid">
                 <div class="album-card">
                     <div class="album-cover">
-                        <i class="fas fa-compact-disc"></i>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/2/29/Skillet_%28album%29_cover.png" alt="Portada de Skillet (álbum)">
                     </div>
                     <div class="album-info">
                         <h3>Skillet</h3>
@@ -411,7 +484,7 @@
                 </div>
                 <div class="album-card">
                     <div class="album-cover">
-                        <i class="fas fa-compact-disc"></i>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/e/ec/Comatose_Album_Cover.jpg" alt="Portada de Comatose">
                     </div>
                     <div class="album-info">
                         <h3>Comatose</h3>
@@ -420,7 +493,7 @@
                 </div>
                 <div class="album-card">
                     <div class="album-cover">
-                        <i class="fas fa-compact-disc"></i>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/6/6f/Skillet_-_Awake.png" alt="Portada de Awake">
                     </div>
                     <div class="album-info">
                         <h3>Awake</h3>
@@ -429,7 +502,7 @@
                 </div>
                 <div class="album-card">
                     <div class="album-cover">
-                        <i class="fas fa-compact-disc"></i>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/6/64/Skillet_-_Rise.png" alt="Portada de Rise">
                     </div>
                     <div class="album-info">
                         <h3>Rise</h3>
@@ -438,7 +511,7 @@
                 </div>
                 <div class="album-card">
                     <div class="album-cover">
-                        <i class="fas fa-compact-disc"></i>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/6/64/Skillet_-_Unleashed_%28Official_Album_Cover%29.png" alt="Portada de Unleashed">
                     </div>
                     <div class="album-info">
                         <h3>Unleashed</h3>
@@ -447,7 +520,7 @@
                 </div>
                 <div class="album-card">
                     <div class="album-cover">
-                        <i class="fas fa-compact-disc"></i>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/9/90/Skillet_-_Victorious.png" alt="Portada de Victorious">
                     </div>
                     <div class="album-info">
                         <h3>Victorious</h3>
@@ -458,13 +531,20 @@
         </div>
     </section>
 
-    <!-- Top Songs Section -->
+    <section id="store-preview" class="store-preview">
+        <div class="container">
+            <h2 class="section-title">Tienda Oficial Skillet</h2>
+            <p class="store-cta">Descubre productos exclusivos de Skillet: camisetas, discos, accesorios y mucho más. Todo oficial y de la mejor calidad.</p>
+            <a href="tienda.html" target="_blank" class="btn">Visitar Tienda Completa</a>
+        </div>
+    </section>
+
     <section id="songs" class="songs">
         <div class="container">
             <h2 class="section-title">Top Canciones de Skillet</h2>
             <div class="songs-list">
                 <div class="song-item">
-                    <div class="song-header">
+                    <div class="song-header" style="background-image: url('https://static.wikia.nocookie.net/skillet/images/7/71/Skillet_Monster.jpg/revision/latest/scale-to-width-down/500?cb=20110126150127&path-prefix=es');">
                         <h3>1. Monster</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -473,7 +553,7 @@
                     </div>
                 </div>
                 <div class="song-item">
-                    <div class="song-header">
+                    <div class="song-header" style="background-image: url('https://i.pinimg.com/736x/36/14/51/3614514f075874f0b79e4571c127192e.jpg');">
                         <h3>2. Hero</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -482,7 +562,7 @@
                     </div>
                 </div>
                 <div class="song-item">
-                    <div class="song-header">
+                    <div class="song-header" style="background-image: url('https://cdn-images.dzcdn.net/images/cover/b90ae7dbcefa80b301e04a846f968d6c/0x1900-000000-80-0-0.jpg');">
                         <h3>3. Feel Invincible</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -491,7 +571,7 @@
                     </div>
                 </div>
                 <div class="song-item">
-                    <div class="song-header">
+                    <div class="song-header" style="background-image: url('https://cdn-images.dzcdn.net/images/cover/276bd91f166420098aeeb09847bcccd2/1900x1900-000000-80-0-0.jpg');">
                         <h3>4. Awake and Alive</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -500,7 +580,7 @@
                     </div>
                 </div>
                 <div class="song-item">
-                    <div class="song-header" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://m.media-amazon.com/images/I/51qKlkoR3bL._UXNaN_FMjpg_QL85_.jpg'); background-size: cover; background-position: center;">
+                    <div class="song-header" style="background-image: url('https://m.media-amazon.com/images/I/51qKlkoR3bL._UXNaN_FMjpg_QL85_.jpg');">
                         <h3>5. Whisper in the Dark</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -509,7 +589,7 @@
                     </div>
                 </div>
                 <div class="song-item">
-                    <div class="song-header">
+                    <div class="song-header" style="background-image: url('https://cdn-images.deezer.com/images/cover/d76587399882209d0d3a5e1144a6f7a7/264x264-000000-80-0-0.jpg');">
                         <h3>6. Savior</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -517,47 +597,10 @@
                         <p>En 2004, Skillet publicó «Savior», el primer corte promocional de su octavo disco Collide. Fue la primera canción de la banda en alcanzar las listas seculares, al llegar al #26 del Mainstream Rock de Billboard. John Cooper ha comentado que la canción habla de su niñez, una etapa que fue marcada por la mala relación con su padre</p>
                     </div>
                 </div>
-                <div class="song-item">
-                    <div class="song-header">
-                        <h3>7. Not gonna Die</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="song-content">
-                        <p>Fue el segundo sencillo del octavo disco de Skillet, Rise. La canción llego al #1 del Listado de Rock Cristiano de Billboard, y estuvo dentro del Top 10 de listados seculares como el Mainstream Rock y el Rock Activo, también de Billboard. Fue el único sencillo del álbum que recibió un Disco de Oro al vender mas de 500.000 copias.</p>
-                    </div>
-                </div>
-                <div class="song-item">
-                    <div class="song-header">
-                        <h3>8. Rebirthing</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="song-content">
-                        <p>Se lanzó como primer sencillo del álbum Comatose, llegando al #9 del Listado Cristiano de Billboard y al #4 del Conteo de Canciones Contemporáneas. La canción habla acerca de las segundas oportunidades que Dios nos da, de vida, de restaurar una relación, o simplemente de no volver a los mismos errores.</p>
-                    </div>
-                </div>
-                <div class="song-item">
-                    <div class="song-header">
-                        <h3>9. The older I Get</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="song-content">
-                        <p>Lanzado como cuarto sencillo de Comatose, «The Older I Get» demostró cómo Skillet también podía convertir baladas en éxitos radiales. El tema llego al #1 tanto en el Listado Principal de Canciones Cristianas de Billboard como en la lista de Rock Cristiano. La canción está inspirada en la historia de reconciliación de John Cooper y su padre. Según Cooper, el hecho de haber perdonado a su padre por la mala relación que tuvieron mientras él era adolescente, fue algo muy liberador.</p>
-                    </div>
-                </div>
-                <div class="song-item">
-                    <div class="song-header">
-                        <h3>10. Alien Youth</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="song-content">
-                        <p>Pocos saben que antes de convertirse en uno de los referentes del rock cristiano con Comatose y Awake, Skillet ya había dado a conocer su atractiva propuesta industrial de rock. Y lo hicieron con destacados proyectos como Invincible y Alien Youth. Este último se publicó en 2001 e incluyo una canción, que además de darle nombre al disco, le dio a la banda de Tennessee su primera nominación a los premios Dove.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact">
         <div class="container">
             <div class="social-links">
@@ -575,10 +618,14 @@
         // Script para las canciones desplegables
         document.querySelectorAll('.song-header').forEach(header => {
             header.addEventListener('click', () => {
-                const songItem = header.parentElement;
+                const songItem = header.closest('.song-item'); 
+                
+                // Toggle de la clase 'active' para mostrar/ocultar el contenido
                 songItem.classList.toggle('active');
                 
                 const icon = header.querySelector('i');
+                
+                // Cambiar el ícono
                 if (songItem.classList.contains('active')) {
                     icon.classList.remove('fa-chevron-down');
                     icon.classList.add('fa-chevron-up');
@@ -599,8 +646,9 @@
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
+                    // Ajustamos el desplazamiento para compensar la altura del header sticky (80px)
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop - 80, 
                         behavior: 'smooth'
                     });
                 }

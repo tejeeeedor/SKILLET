@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procesando Pago - Skillet Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* Header de la pasarela */
+        .gateway-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .gateway-header h1 {
+            font-size: 2.5rem;
+            color: #e10600;
+            margin-bottom: 10px;
+        }
+        
+        .gateway-header p {
+            font-size: 1.1rem;
+            color: #aaa;
+        }
+        
+        /* Pasarela principal */
+        .payment-gateway {
+            background-color: #111;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gateway-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .gateway-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .secure-badge {
+            background-color: #00a8ff;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .payment-amount {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .amount-label {
+            color: #aaa;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .amount-value {
+            font-size: 3rem;
+            color: #e10600;
+            font-weight: bold;
+        }
+        
+        .amount-currency {
+            font-size: 1.5rem;
+            color: #777;
+            margin-left: 5px;
+        }
+        
+        /* Pasos del pago */
+        .payment-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .payment-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid #333;
+        }
+        
+        .step-number.active {
+            background-color: #e10600;
+            border-color: #e10600;
+        }
+        
+        .step-number.completed {
+            background-color: #00a8ff;
+            border-color: #00a8ff;
+        }
+        
+        .step-label {
+            font-size: 0.9rem;
+            color: #aaa;
+            text-align: center;
+        }
+        
+        .step-label.active {
+            color: #e10600;
+            font-weight: bold;
+        }
+        
+        .step-label.completed {
+            color: #00a8ff;
+        }
+        
+        .steps-line {
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background-color: #333;
+            z-index: 1;
+        }
+        
+        /* Contenido del pago */
+        .payment-content {
+            display: none;
+        }
+        
+        .payment-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        /* Paso 1: Selección de banco */
+        .bank-selection {
+            margin-bottom: 30px;
+        }
+        
+        .bank-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .bank-option {
+            background-color: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .bank-option:hover {
+            border-color: #444;
+            transform: translateY(-3px);
+        }
+        
+        .bank-option.selected {
+            border-color: #e10600;
+            background-color: rgba(225, 6, 0, 0.05);
+        }
+        
+        .bank-logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #e10600;
+        }
+        
+        .bank-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        /* Paso 2: Verificación */
+        .verification-step {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .verification-icon {
+            font-size: 4rem;
+            color: #00a8ff;
+            margin-bottom: 20px;
+        }
+        
+        .verification-text {
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        /* Paso 3: Autenticación */
+        .authentication-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #f0f0f0;
+            font-weight: 500;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            padding-left: 45px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #f0f0f0;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #e10600;
+            box-shadow: 0 0 0 2px rgba(225, 6, 0, 0.2);
+        }
+        
+        .security-note {
+            background-color: rgba(0, 168, 255, 0.1);
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Paso 4: Procesando */
+        .processing-step {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .processing-icon {
+            font-size: 4rem;
+            color: #e10600;
+            margin-bottom: 20px;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(225, 6, 0, 0.1);
+            border-top: 4px solid #e10600;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        .processing-text {
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        .processing-details {
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        /* Paso 5: Completado */
+        .completion-step {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .completion-icon {
+            font-size: 5rem;
+            color: #00a8ff;
+            margin-bottom: 20px;
+        }
+        
+        .completion-title {
+            font-size: 2rem;
+            color: #00a8ff;
+            margin-bottom: 15px;
+        }
+        
+        .completion-text {
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .transaction-details {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .transaction-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .transaction-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            font-weight: bold;
+            color: #e10600;
+        }
+        
+        /* Botones */
+        .gateway-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #e10600;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #b30500;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(225, 6, 0, 0.4);
+        }
+        
+        .btn:disabled {
+            background-color: #333;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #333;
+            color: #f0f0f0;
+        }
+        
+        .btn-outline:hover {
+            background-color: #333;
+        }
+        
+        .btn-full {
+            width: 100%;
+            padding: 15px;
+        }
+        
+        /* Footer */
+        .gateway-footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .gateway-footer a {
+            color: #e10600;
+            text-decoration: none;
+        }
+        
+        .gateway-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .payment-gateway {
+                padding: 25px;
+            }
+            
+            .gateway-top-bar {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .bank-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .payment-steps {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .steps-line {
+                display: none;
+            }
+            
+            .gateway-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .bank-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .amount-value {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="gateway-header">
+            <h1><i class="fas fa-lock"></i> Pasarela de Pago Segura</h1>
+            <p>Proceso de pago encriptado SSL 256-bit</p>
+        </header>
+        
+        <main class="payment-gateway">
+            <!-- Barra superior -->
+            <div class="gateway-top-bar">
+                <div class="gateway-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>SecurePay</span>
+                </div>
+                <div class="secure-badge">
+                    <i class="fas fa-lock"></i> 100% Seguro
+                </div>
+                <div style="color: #aaa; font-size: 0.9rem;">
+                    Orden: <span id="orderId">SKL-2023-001</span>
+                </div>
+            </div>
+            
+            <!-- Monto del pago -->
+            <div class="payment-amount">
+                <div class="amount-label">Total a pagar</div>
+                <div class="amount-value">
+                    <span id="paymentAmount">0.00</span>
+                    <span class="amount-currency">€</span>
+                </div>
+            </div>
+            
+            <!-- Pasos del pago -->
+            <div class="payment-steps">
+                <div class="steps-line"></div>
+                
+                <div class="payment-step">
+                    <div class="step-number active" id="step1Number">1</div>
+                    <div class="step-label active">Banco</div>
+                </div>
+                
+                <div class="payment-step">
+                    <div class="step-number" id="step2Number">2</div>
+                    <div class="step-label">Verificación</div>
+                </div>
+                
+                <div class="payment-step">
+                    <div class="step-number" id="step3Number">3</div>
+                    <div class="step-label">Autenticación</div>
+                </div>
+                
+                <div class="payment-step">
+                    <div class="step-number" id="step4Number">4</div>
+                    <div class="step-label">Procesando</div>
+                </div>
+                
+                <div class="payment-step">
+                    <div class="step-number" id="step5Number">5</div>
+                    <div class="step-label">Completado</div>
+                </div>
+            </div>
+            
+            <!-- Contenido de los pasos -->
+            
+            <!-- Paso 1: Selección de banco -->
+            <div class="payment-content active" id="step1Content">
+                <h3 style="margin-bottom: 20px; color: #e10600;">Selecciona tu banco</h3>
+                <p style="color: #aaa; margin-bottom: 25px;">Elige tu entidad bancaria para continuar con el pago seguro.</p>
+                
+                <div class="bank-selection">
+                    <div class="bank-grid" id="bankGrid">
+                        <!-- Los bancos se cargarán dinámicamente -->
+                    </div>
+                </div>
+                
+                <div class="gateway-buttons">
+                    <button class="btn btn-outline" onclick="cancelPayment()">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button class="btn" id="nextStep1" onclick="nextStep(1)" disabled>
+                        Continuar <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Paso 2: Verificación -->
+            <div class="payment-content" id="step2Content">
+                <div class="verification-step">
+                    <div class="verification-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 style="margin-bottom: 20px; color: #00a8ff;">Verificación de seguridad</h3>
+                    <p class="verification-text">
+                        Serás redirigido a la página de tu banco para verificar tu identidad.<br>
+                        Este proceso es necesario para garantizar la seguridad de tu pago.
+                    </p>
+                    <div style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; margin-top: 30px;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <i class="fas fa-lock" style="color: #00a8ff; font-size: 1.5rem;"></i>
+                            <div>
+                                <div style="font-weight: bold;">Conexión segura activada</div>
+                                <div style="font-size: 0.9rem; color: #aaa;">Tus datos están encriptados</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <i class="fas fa-user-shield" style="color: #00a8ff; font-size: 1.5rem;"></i>
+                            <div>
+                                <div style="font-weight: bold;">Autenticación bancaria</div>
+                                <div style="font-size: 0.9rem; color: #aaa;">Verificación de identidad requerida</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gateway-buttons">
+                    <button class="btn btn-outline" onclick="previousStep(2)">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                    <button class="btn" onclick="nextStep(2)">
+                        Continuar al banco <i class="fas fa-external-link-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Paso 3: Autenticación -->
+            <div class="payment-content" id="step3Content">
+                <h3 style="margin-bottom: 20px; color: #e10600;">Autenticación bancaria</h3>
+                <p style="color: #aaa; margin-bottom: 30px;">
+                    Introduce las credenciales de seguridad proporcionadas por tu banco.
+                    <span id="selectedBankName" style="color: #00a8ff; font-weight: bold;"></span>
+                </p>
+                
+                <div class="authentication-form">
+                    <div class="form-group">
+                        <label class="form-label">Usuario/Código de acceso</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="bankUsername" placeholder="Introduce tu usuario">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Contraseña/Token</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-key input-icon"></i>
+                            <input type="password" id="bankPassword" placeholder="Introduce tu contraseña">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Código SMS (si aplica)</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-mobile-alt input-icon"></i>
+                            <input type="text" id="bankSmsCode" placeholder="Código de 6 dígitos">
+                        </div>
+                    </div>
+                    
+                    <div class="security-note">
+                        <i class="fas fa-info-circle"></i> 
+                        <strong>Importante:</strong> Esta información no se almacena en nuestros servidores. 
+                        La autenticación se realiza directamente con tu banco mediante protocolos seguros.
+                    </div>
+                </div>
+                
+                <div class="gateway-buttons">
+                    <button class="btn btn-outline" onclick="previousStep(3)">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                    <button class="btn" id="authenticateBtn" onclick="authenticatePayment()">
+                        <i class="fas fa-user-check"></i> Autenticar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Paso 4: Procesando -->
+            <div class="payment-content" id="step4Content">
+                <div class="processing-step">
+                    <div class="spinner"></div>
+                    <h3 style="margin-bottom: 15px; color: #e10600;">Procesando tu pago</h3>
+                    <p class="processing-text">
+                        Estamos verificando y procesando tu transacción.<br>
+                        Por favor, no cierres esta ventana.
+                    </p>
+                    
+                    <div class="processing-details">
+                        <div style="margin-bottom: 10px;">
+                            <i class="fas fa-circle" style="color: #e10600; font-size: 0.6rem; margin-right: 10px; animation: pulse 1.5s infinite;"></i>
+                            <span>Conectando con el banco...</span>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <i class="fas fa-circle" style="color: #e10600; font-size: 0.6rem; margin-right: 10px; animation: pulse 1.5s infinite; animation-delay: 0.3s;"></i>
+                            <span>Verificando fondos...</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-circle" style="color: #e10600; font-size: 0.6rem; margin-right: 10px; animation: pulse 1.5s infinite; animation-delay: 0.6s;"></i>
+                            <span>Confirmando transacción...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Paso 5: Completado -->
+            <div class="payment-content" id="step5Content">
+                <div class="completion-step">
+                    <div class="completion-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2 class="completion-title">¡Pago Completado!</h2>
+                    <p class="completion-text">
+                        Tu transacción ha sido procesada exitosamente.<br>
+                        Hemos enviado un comprobante a tu correo electrónico.
+                    </p>
+                    
+                    <div class="transaction-details">
+                        <div class="transaction-row">
+                            <span>Número de transacción:</span>
+                            <span id="transactionId">TXN-<span id="randomTxn">001</span></span>
+                        </div>
+                        <div class="transaction-row">
+                            <span>Fecha y hora:</span>
+                            <span id="transactionDate"></span>
+                        </div>
+                        <div class="transaction-row">
+                            <span>Método de pago:</span>
+                            <span id="transactionMethod">Transferencia bancaria</span>
+                        </div>
+                        <div class="transaction-row">
+                            <span>Banco:</span>
+                            <span id="transactionBank">BBVA</span>
+                        </div>
+                        <div class="transaction-row">
+                            <span>Total pagado:</span>
+                            <span id="transactionAmount">$0.00</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-full" onclick="finishPayment()">
+                        <i class="fas fa-home"></i> Volver a la tienda
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="gateway-footer">
+            <p>
+                <i class="fas fa-shield-alt"></i> Este sitio utiliza encriptación SSL de 256-bit para proteger tu información.
+                <br>
+                Para cualquier duda, contacta con <a href="#">soporte@skilletstore.com</a>
+            </p>
+            <p style="margin-top: 15px; font-size: 0.8rem; color: #666;">
+                © 2023 SecurePay Payment Gateway. Todos los derechos reservados.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Datos de la pasarela
+        let currentStep = 1;
+        let selectedBank = null;
+        let transactionData = {
+            amount: 0,
+            orderId: '',
+            bank: '',
+            transactionId: '',
+            date: ''
+        };
+        
+        // Bancos disponibles
+        const banks = [
+            { id: 'bbva', name: 'BBVA', logo: 'fas fa-university', color: '#004481' },
+            { id: 'santander', name: 'Santander', logo: 'fas fa-landmark', color: '#ec0000' },
+            { id: 'caixa', name: 'CaixaBank', logo: 'fas fa-piggy-bank', color: '#0066a1' },
+            { id: 'sabadell', name: 'Sabadell', logo: 'fas fa-building', color: '#00a0e3' },
+            { id: 'bankia', name: 'Bankia', logo: 'fas fa-chart-line', color: '#e2001a' },
+            { id: 'ing', name: 'ING', logo: 'fas fa-leaf', color: '#ff6200' },
+            { id: 'kutxa', name: 'Kutxabank', logo: 'fas fa-hand-holding-usd', color: '#00b2a9' },
+            { id: 'unicaja', name: 'Unicaja', logo: 'fas fa-coins', color: '#009cde' },
+            { id: 'ibercaja', name: 'Ibercaja', logo: 'fas fa-money-check-alt', color: '#db0011' }
+        ];
+        
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePaymentGateway();
+            loadBanks();
+            setupEventListeners();
+        });
+        
+        // Inicializar la pasarela
+        function initializePaymentGateway() {
+            // Obtener datos del localStorage (pasados desde checkout)
+            const cartTotal = localStorage.getItem('skilletCartTotal') || '89.99';
+            const orderId = localStorage.getItem('skilletOrderId') || 'SKL-2023-' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            
+            // Configurar datos de la transacción
+            transactionData.amount = parseFloat(cartTotal);
+            transactionData.orderId = orderId;
+            transactionData.transactionId = 'TXN-' + Date.now().toString().slice(-8);
+            
+            // Establecer fecha actual
+            const now = new Date();
+            transactionData.date = now.toLocaleDateString('es-ES', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            
+            // Actualizar UI
+            document.getElementById('paymentAmount').textContent = cartTotal;
+            document.getElementById('orderId').textContent = orderId;
+            document.getElementById('transactionDate').textContent = transactionData.date;
+            document.getElementById('transactionAmount').textContent = '$' + cartTotal;
+            document.getElementById('randomTxn').textContent = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+        }
+        
+        // Cargar bancos en la grid
+        function loadBanks() {
+            const bankGrid = document.getElementById('bankGrid');
+            bankGrid.innerHTML = '';
+            
+            banks.forEach(bank => {
+                const bankOption = document.createElement('div');
+                bankOption.className = 'bank-option';
+                bankOption.dataset.bankId = bank.id;
+                bankOption.innerHTML = `
+                    <div class="bank-logo">
+                        <i class="${bank.logo}"></i>
+                    </div>
+                    <div class="bank-name">${bank.name}</div>
+                    <div style="font-size: 0.8rem; color: #777;">Transferencia segura</div>
+                `;
+                
+                bankOption.addEventListener('click', () => selectBank(bank.id));
+                bankGrid.appendChild(bankOption);
+            });
+        }
+        
+        // Configurar event listeners
+        function setupEventListeners() {
+            // Enter key en campos de autenticación
+            document.getElementById('bankUsername').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') document.getElementById('bankPassword').focus();
+            });
+            
+            document.getElementById('bankPassword').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') document.getElementById('bankSmsCode').focus();
+            });
+            
+            document.getElementById('bankSmsCode').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') authenticatePayment();
+            });
+        }
+        
+        // Seleccionar banco
+        function selectBank(bankId) {
+            // Deseleccionar todos los bancos
+            document.querySelectorAll('.bank-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Seleccionar el banco clickeado
+            const selectedOption = document.querySelector(`[data-bank-id="${bankId}"]`);
+            selectedOption.classList.add('selected');
+            
+            // Guardar banco seleccionado
+            selectedBank = banks.find(bank => bank.id === bankId);
+            
+            // Habilitar botón de continuar
+            document.getElementById('nextStep1').disabled = false;
+        }
+        
+        // Navegación entre pasos
+        function nextStep(step) {
+            // Validaciones según el paso actual
+            if (step === 1 && !selectedBank) {
+                alert('Por favor, selecciona un banco para continuar.');
+                return;
+            }
+            
+            if (step === 3) {
+                const username = document.getElementById('bankUsername').value;
+                const password = document.getElementById('bankPassword').value;
+                
+                if (!username || !password) {
+                    alert('Por favor, introduce tu usuario y contraseña.');
+                    return;
+                }
+            }
+            
+            // Ocultar paso actual
+            document.getElementById(`step${currentStep}Content`).classList.remove('active');
+            document.getElementById(`step${currentStep}Number`).classList.remove('active');
+            
+            // Actualizar barra de progreso
+            document.getElementById(`step${currentStep}Number`).classList.add('completed');
+            
+            currentStep = step + 1;
+            
+            // Mostrar siguiente paso
+            document.getElementById(`step${currentStep}Content`).classList.add('active');
+            document.getElementById(`step${currentStep}Number`).classList.add('active');
+            
+            // Acciones específicas según el paso
+            if (currentStep === 2) {
+                // Paso 2: Configurar banco seleccionado
+                document.getElementById('selectedBankName').textContent = selectedBank.name;
+            } else if (currentStep === 4) {
+                // Paso 4: Simular procesamiento
+                simulatePaymentProcessing();
+            } else if (currentStep === 5) {
+                // Paso 5: Configurar datos finales
+                document.getElementById('transactionBank').textContent = selectedBank.name;
+                document.getElementById('transactionMethod').textContent = `Transferencia - ${selectedBank.name}`;
+            }
+        }
+        
+        function previousStep(step) {
+            // Ocultar paso actual
+            document.getElementById(`step${currentStep}Content`).classList.remove('active');
+            document.getElementById(`step${currentStep}Number`).classList.remove('active');
+            
+            // Actualizar barra de progreso
+            document.getElementById(`step${currentStep}Number`).classList.remove('completed');
+            
+            currentStep = step - 1;
+            
+            // Mostrar paso anterior
+            document.getElementById(`step${currentStep}Content`).classList.add('active');
+            document.getElementById(`step${currentStep}Number`).classList.add('active');
+        }
+        
+        // Autenticar pago
+        function authenticatePayment() {
+            const btn = document.getElementById('authenticateBtn');
+            const originalText = btn.innerHTML;
+            
+            // Mostrar estado de carga
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Autenticando...';
+            btn.disabled = true;
+            
+            // Simular autenticación
+            setTimeout(() => {
+                // Simular autenticación exitosa
+                nextStep(3);
+                
+                // Restaurar botón
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 2000);
+        }
+        
+        // Simular procesamiento del pago
+        function simulatePaymentProcessing() {
+            // Simular diferentes etapas del procesamiento
+            setTimeout(() => {
+                updateProcessingText('Verificando credenciales...');
+            }, 1000);
+            
+            setTimeout(() => {
+                updateProcessingText('Conectando con el servidor bancario...');
+            }, 3000);
+            
+            setTimeout(() => {
+                updateProcessingText('Autorizando transacción...');
+            }, 5000);
+            
+            setTimeout(() => {
+                updateProcessingText('Confirmando fondos...');
+            }, 7000);
+            
+            // Finalizar procesamiento
+            setTimeout(() => {
+                nextStep(4);
+            }, 9000);
+        }
+        
+        function updateProcessingText(text) {
+            const details = document.querySelector('.processing-details');
+            if (details) {
+                details.innerHTML = `
+                    <div style="margin-bottom: 10px;">
+                        <i class="fas fa-check-circle" style="color: #00a8ff; font-size: 0.8rem; margin-right: 10px;"></i>
+                        <span>${text}</span>
+                    </div>
+                ` + details.innerHTML;
+            }
+        }
+        
+        // Cancelar pago
+        function cancelPayment() {
+            if (confirm('¿Estás seguro de que quieres cancelar el pago? Todos los datos se perderán.')) {
+                // Redirigir a checkout o tienda
+                window.location.href = 'checkout.html';
+            }
+        }
+        
+        // Finalizar pago
+        function finishPayment() {
+            // Guardar comprobante en localStorage
+            localStorage.setItem('lastTransaction', JSON.stringify({
+                ...transactionData,
+                bank: selectedBank.name,
+                status: 'completed',
+                timestamp: new Date().toISOString()
+            }));
+            
+            // Limpiar carrito
+            localStorage.removeItem('skilletCart');
+            localStorage.removeItem('skilletCartTotal');
+            
+            // Redirigir a página de confirmación o tienda
+            window.location.href = 'index.html?payment=success';
+        }
+        
+        // Teclas de acceso rápido para testing (solo en desarrollo)
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+Alt+P para completar pago rápido (testing)
+            if (e.ctrlKey && e.altKey && e.key === 'p') {
+                e.preventDefault();
+                if (currentStep === 1 && !selectedBank) {
+                    selectBank('bbva');
+                    nextStep(1);
+                } else if (currentStep === 2) {
+                    nextStep(2);
+                } else if (currentStep === 3) {
+                    document.getElementById('bankUsername').value = 'demo_user';
+                    document.getElementById('bankPassword').value = 'demo123';
+                    authenticatePayment();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
