@@ -215,7 +215,7 @@
         }
         
         .album-card:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
         
         .album-cover {
@@ -237,7 +237,60 @@
         }
         
         .album-info {
-            padding: 15px;
+            padding: 10px 15px; /* Reducido para hacer espacio */
+        }
+
+        /* Estilos para el Acordeón de Canciones (details/summary) */
+        .song-list-toggle {
+            display: block;
+            cursor: pointer;
+            color: #e10600;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px 0 10px 0;
+            border-top: 1px solid #333;
+            margin-top: 5px;
+        }
+
+        .song-list-toggle summary {
+            list-style: none;
+            outline: none;
+        }
+
+        .song-list-toggle summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .song-list-toggle summary::after {
+            content: ' Mostrar Canciones ▼';
+            display: inline-block;
+            transition: transform 0.3s;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        .song-list-toggle[open] summary::after {
+            content: ' Ocultar Canciones ▲';
+        }
+
+        .song-list-content {
+            padding: 10px 15px 15px 15px;
+            font-size: 0.9em;
+        }
+
+        .song-list-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .song-list-content li {
+            border-bottom: 1px dotted #333;
+            padding: 5px 0;
+        }
+
+        .song-list-content li:last-child {
+            border-bottom: none;
         }
         
         /* Store Preview Section */
@@ -431,7 +484,7 @@
             <div class="members-grid">
                 <div class="member-card">
                     <div class="member-img">
-                        <img src="https://example.com/john-cooper.jpg" alt="Foto de John Cooper">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbPmU0fxqkDskRmxErgMJp2vrjf2eblI_zKQ&s" alt="Foto de John Cooper">
                     </div>
                     <div class="member-info">
                         <h3>John Cooper</h3>
@@ -440,7 +493,7 @@
                 </div>
                 <div class="member-card">
                     <div class="member-img">
-                        <img src="https://example.com/korey-cooper.jpg" alt="Foto de Korey Cooper">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_BCC2ITPDrAiwBez5kqOEjUX_mqjcg-aZow&s" alt="Foto de Korey Cooper">
                     </div>
                     <div class="member-info">
                         <h3>Korey Cooper</h3>
@@ -449,7 +502,7 @@
                 </div>
                 <div class="member-card">
                     <div class="member-img">
-                        <img src="https://example.com/jen-ledger.jpg" alt="Foto de Jen Ledger">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcaa4w0TpWxe7MIOHGnfQoLz6HZzqJCQetA&s" alt="Foto de Jen Ledger">
                     </div>
                     <div class="member-info">
                         <h3>Jen Ledger</h3>
@@ -458,7 +511,7 @@
                 </div>
                 <div class="member-card">
                     <div class="member-img">
-                        <img src="https://example.com/seth-morrison.jpg" alt="Foto de Seth Morrison">
+                        <img src="https://m.media-amazon.com/images/M/MV5BMTYxMTcxOTktYjJhYS00ZWRhLWE4ZWEtYWYxYmYwNjMzM2MxXkEyXkFqcGc@._V1_.jpg" alt="Foto de Seth Morrison">
                     </div>
                     <div class="member-info">
                         <h3>Seth Morrison</h3>
@@ -475,57 +528,341 @@
             <div class="albums-grid">
                 <div class="album-card">
                     <div class="album-cover">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/2/29/Skillet_%28album%29_cover.png" alt="Portada de Skillet (álbum)">
+                        <img src="https://i.pinimg.com/236x/1f/bc/5a/1fbc5a8c4d33c156cf2939303fcefe65.jpg" alt="Portada de Skillet (álbum)">
                     </div>
                     <div class="album-info">
                         <h3>Skillet</h3>
                         <p>1996</p>
                     </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>I Can</li>
+                                <li>Gasoline</li>
+                                <li>Saturn</li>
+                                <li>My Beautiful Robe</li>
+                                <li>Promise Blender</li>
+                                <li>Paint</li>
+                                <li>Safe With You</li>
+                                <li>You Thought</li>
+                                <li>Boundaries</li>
+                                <li>Splinter</li>
+                            </ul>
+                        </div>
+                    </details>
                 </div>
+
                 <div class="album-card">
                     <div class="album-cover">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/e/ec/Comatose_Album_Cover.jpg" alt="Portada de Comatose">
+                        <img src="https://m.media-amazon.com/images/I/81xIH-ks5+L._UF894,1000_QL80_.jpg" alt="Portada de Hey You, I Love Your Soul">
+                    </div>
+                    <div class="album-info">
+                        <h3>Hey You, I Love Your Soul</h3>
+                        <p>1998</p>
+                    </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>Hey You, I Love Your Soul</li>
+                                <li>Locked in a Cage</li>
+                                <li>More Faithful</li>
+                                <li>Suspended In You</li>
+                                <li>Take</li>
+                                <li>Whirlwind</li>
+                                <li>You're in My Brain</li>
+                                <li>Cover Me</li>
+                                <li>Dive Over In</li>
+                                <li>The Best Kept Secret</li>
+                                <li>Heaven in My Veins</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+                
+                <div class="album-card">
+                    <div class="album-cover">
+                        <img src="https://i.ytimg.com/vi/WmtagTeGQ3Y/sddefault.jpg" alt="Portada de Invincible">
+                    </div>
+                    <div class="album-info">
+                        <h3>Invincible</h3>
+                        <p>2000</p>
+                    </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>Best Kept Secret</li>
+                                <li>Invincible</li>
+                                <li>You're Powerful</li>
+                                <li>Come On to the Future</li>
+                                <li>Rest</li>
+                                <li>The One</li>
+                                <li>You Take My Rights Away</li>
+                                <li>Shout to the Lord</li>
+                                <li>Your Name Is Holy</li>
+                                <li>Each Other</li>
+                                <li>The Fire Breathers</li>
+                                <li>Safe with You (2000 Version)</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+                
+                <div class="album-card">
+                    <div class="album-cover">
+                        <img src="https://i.discogs.com/pU5B3r8JqpRrBNdNl-vhjFcOlyliLTvBuAbVdnuIQYU/rs:fit/g:sm/q:40/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNzYz/NTgtMTc0MDk3MDcw/MS01NzA0LmpwZWc.jpeg" alt="Portada de Alien Youth">
+                    </div>
+                    <div class="album-info">
+                        <h3>Alien Youth</h3>
+                        <p>2001</p>
+                    </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>Alien Youth</li>
+                                <li>Eating Me Away</li>
+                                <li>Rippin' Me Off</li>
+                                <li>Stronger</li>
+                                <li>You Are My Hope</li>
+                                <li>Earth Invasion</li>
+                                <li>Kill Me, Heal Me</li>
+                                <li>Vapor</li>
+                                <li>One Real Thing</li>
+                                <li>The Thirst Is Taking Over</li>
+                                <li>Will You Be There (Falling Down)</li>
+                                <li>Come On to the Future (Intro)</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="album-card">
+                    <div class="album-cover">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/8/82/Collide_%28album%29.jpg" alt="Portada de Collide">
+                    </div>
+                    <div class="album-info">
+                        <h3>Collide</h3>
+                        <p>2003</p>
+                    </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>Forsaken</li>
+                                <li>My Obsession</li>
+                                <li>Savior</li>
+                                <li>Open Wounds</li>
+                                <li>Under My Skin</li>
+                                <li>Collide</li>
+                                <li>A Little More</li>
+                                <li>Cycle Down</li>
+                                <li>Fingernails</li>
+                                <li>Energy</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="album-card">
+                    <div class="album-cover">
+                        <img src="https://cdn-images.dzcdn.net/images/cover/68378d9058edc787fdc08ef51e933b4e/0x1900-000000-80-0-0.jpg" alt="Portada de Comatose">
                     </div>
                     <div class="album-info">
                         <h3>Comatose</h3>
                         <p>2006</p>
                     </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>Rebirthing</li>
+                                <li>Whispers in the Dark</li>
+                                <li>The Older I Get</li>
+                                <li>The Last Night</li>
+                                <li>Comatose</li>
+                                <li>Better than Drugs</li>
+                                <li>Those Nights</li>
+                                <li>Falling Inside the Black</li>
+                                <li>Say Goodbye</li>
+                                <li>Live Free or Let Me Die</li>
+                                <li>Awake and Alive (Bonus Track)</li>
+                            </ul>
+                        </div>
+                    </details>
                 </div>
+
                 <div class="album-card">
                     <div class="album-cover">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/6/6f/Skillet_-_Awake.png" alt="Portada de Awake">
+                        <img src="https://cdn-images.dzcdn.net/images/cover/276bd91f166420098aeeb09847bcccd2/1900x1900-000000-80-0-0.jpg" alt="Portada de Awake">
                     </div>
                     <div class="album-info">
                         <h3>Awake</h3>
                         <p>2009</p>
                     </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>Awake and Alive</li>
+                                <li>Hero</li>
+                                <li>Monster</li>
+                                <li>One Day Too Late</li>
+                                <li>Don't Wake Me</li>
+                                <li>It's Not Me, It's You</li>
+                                <li>Should've When You Could've</li>
+                                <li>Forgiven</li>
+                                <li>Never Surrender</li>
+                                <li>Falling Inside The Black</li>
+                                <li>Lucy</li>
+                            </ul>
+                        </div>
+                    </details>
                 </div>
+
                 <div class="album-card">
                     <div class="album-cover">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/6/64/Skillet_-_Rise.png" alt="Portada de Rise">
+                        <img src="https://cdn-images.dzcdn.net/images/cover/8371d7162676a323868ca2e2f5cf4fc4/1900x1900-000000-80-0-0.jpg" alt="Portada de Rise">
                     </div>
                     <div class="album-info">
                         <h3>Rise</h3>
                         <p>2013</p>
                     </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>Rise</li>
+                                <li>Sick of It</li>
+                                <li>Good to Be Alive</li>
+                                <li>Not Gonna Die</li>
+                                <li>Circus for a Psycho</li>
+                                <li>American Noise</li>
+                                <li>Madness in Me</li>
+                                <li>Salvation</li>
+                                <li>Fire and Fury</li>
+                                <li>My Religion</li>
+                                <li>Hard to Find</li>
+                                <li>What I Believe</li>
+                            </ul>
+                        </div>
+                    </details>
                 </div>
+
                 <div class="album-card">
                     <div class="album-cover">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/6/64/Skillet_-_Unleashed_%28Official_Album_Cover%29.png" alt="Portada de Unleashed">
+                        <img src="https://www.lahiguera.net/musicalia/artistas/skillet/disco/7749/skillet_unleashed-portada.jpg" alt="Portada de Unleashed">
                     </div>
                     <div class="album-info">
                         <h3>Unleashed</h3>
                         <p>2016</p>
                     </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>Feel Invincible</li>
+                                <li>The Resistance</li>
+                                <li>Back From The Dead</li>
+                                <li>Stars</li>
+                                <li>I Want To Live</li>
+                                <li>Undefeated</li>
+                                <li>Famous</li>
+                                <li>Lions</li>
+                                <li>Out of Hell</li>
+                                <li>Burn It Down</li>
+                                <li>Brave</li>
+                                <li>You Get Me High</li>
+                            </ul>
+                        </div>
+                    </details>
                 </div>
+
                 <div class="album-card">
                     <div class="album-cover">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/9/90/Skillet_-_Victorious.png" alt="Portada de Victorious">
+                        <img src="https://www.lahiguera.net/musicalia/artistas/skillet/disco/9892/skillet_victorious-portada.jpg" alt="Portada de Victorious">
                     </div>
                     <div class="album-info">
                         <h3>Victorious</h3>
                         <p>2019</p>
                     </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>Legendary</li>
+                                <li>You Ain't Ready</li>
+                                <li>Victorious</li>
+                                <li>This is the Kingdom</li>
+                                <li>Save Me</li>
+                                <li>Rise Up</li>
+                                <li>Terrify the Dark</li>
+                                <li>Anchor</li>
+                                <li>Nightingale</li>
+                                <li>Reach</li>
+                                <li>Dreaming of Eden</li>
+                                <li>Back to Life</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+                
+                <div class="album-card">
+                    <div class="album-cover">
+                        <img src="https://www.lahiguera.net/musicalia/artistas/skillet/disco/11895/skillet_dominion-portada.jpg" alt="Portada de Dominion">
+                    </div>
+                    <div class="album-info">
+                        <h3>Dominion</h3>
+                        <p>2022</p>
+                    </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>Surviving the Game</li>
+                                <li>Standing in the Fire</li>
+                                <li>Refuge</li>
+                                <li>Shout Em Down</li>
+                                <li>Dominion</li>
+                                <li>Valley of Death</li>
+                                <li>Beyond Incredible</li>
+                                <li>Destiny</li>
+                                <li>Radiant</li>
+                                <li>Forever or the End</li>
+                                <li>Ignite</li>
+                                <li>White Horse</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="album-card">
+                    <div class="album-cover">
+                        <img src="https://cdn-images.dzcdn.net/images/cover/6a4e5c77e0bf66a1af1d9e03a4d9ad91/0x1900-000000-80-0-0.jpg" alt="Portada de Revolution">
+                    </div>
+                    <div class="album-info">
+                        <h3>Revolution</h3>
+                        <p>2024</p>
+                    </div>
+                    <details class="song-list-toggle">
+                        <summary></summary>
+                        <div class="song-list-content">
+                            <ul>
+                                <li>In the Revolution</li>
+                                <li>Loud and Clear</li>
+                                <li>The Forever Right</li>
+                                <li>Set It Off</li>
+                                <li>Running Out of Time</li>
+                                <li>What the Fire Started</li>
+                                <li>Invincible God</li>
+                                <li>Breathe</li>
+                                <li>Standing on the Ashes</li>
+                                <li>The Mountain</li>
+                            </ul>
+                        </div>
+                    </details>
                 </div>
             </div>
         </div>
@@ -544,7 +881,7 @@
             <h2 class="section-title">Top Canciones de Skillet</h2>
             <div class="songs-list">
                 <div class="song-item">
-                    <div class="song-header" style="background-image: url('https://static.wikia.nocookie.net/skillet/images/7/71/Skillet_Monster.jpg/revision/latest/scale-to-width-down/500?cb=20110126150127&path-prefix=es');">
+                    <div class="song-header" style="background-image: url('https://visionarylightshows.com/cdn/shop/files/skillet_1dbea504-c819-4676-902b-8fcf0165b1a4_300x300.jpg?v=1715529805');">
                         <h3>1. Monster</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -589,7 +926,7 @@
                     </div>
                 </div>
                 <div class="song-item">
-                    <div class="song-header" style="background-image: url('https://cdn-images.deezer.com/images/cover/d76587399882209d0d3a5e1144a6f7a7/264x264-000000-80-0-0.jpg');">
+                    <div class="song-header" style="background-image: url('http://googleusercontent.com/image_generation_content/0');">
                         <h3>6. Savior</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -615,7 +952,7 @@
     </footer>
 
     <script>
-        // Script para las canciones desplegables
+        // Script para las canciones desplegables (Sección Top Canciones)
         document.querySelectorAll('.song-header').forEach(header => {
             header.addEventListener('click', () => {
                 const songItem = header.closest('.song-item'); 
