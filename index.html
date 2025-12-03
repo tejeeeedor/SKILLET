@@ -86,7 +86,7 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://i.scdn.co/image/ab67616d0000b2735d3963ed253465edbed6f7d1');
+                        url(skillet-portada.png);
             background-size: cover;
             background-position: center;
             height: 80vh;
@@ -463,7 +463,7 @@
                 <h1>SKILLET</h1>
                 <p>Música que inspira y transforma</p>
                 <div class="hero-buttons">
-                    <a href="#discography" class="btn">Escuchar Música</a>
+                    <a href="#discog raphy" class="btn">Escuchar Música</a>
                     <a href="tienda.html" target="_blank" class="btn btn-store">Visitar Tienda</a>
                 </div>
             </div>
@@ -483,44 +483,69 @@
             <h2 class="section-title">Miembros</h2>
             <div class="members-grid">
                 <div class="member-card">
-                    <div class="member-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbPmU0fxqkDskRmxErgMJp2vrjf2eblI_zKQ&s" alt="Foto de John Cooper">
-                    </div>
-                    <div class="member-info">
-                        <h3>John Cooper</h3>
-                        <p>Vocalista y bajista</p>
-                    </div>
+                    <a href="miembro.html?nombre=JohnCooper" class="member-link">
+                        <div class="member-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbPmU0fxqkDskRmxErgMJp2vrjf2eblI_zKQ&s" alt="Foto de John Cooper">
+                        </div>
+                        <div class="member-info">
+                            <h3>John Cooper</h3>
+                            <p>Vocalista y bajista</p>
+                        </div>
+                    </a>
                 </div>
                 <div class="member-card">
-                    <div class="member-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_BCC2ITPDrAiwBez5kqOEjUX_mqjcg-aZow&s" alt="Foto de Korey Cooper">
-                    </div>
-                    <div class="member-info">
-                        <h3>Korey Cooper</h3>
-                        <p>Guitarrista y tecladista</p>
-                    </div>
+                    <a href="miembro.html?nombre=KoreyCooper" class="member-link">
+                        <div class="member-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_BCC2ITPDrAiwBez5kqOEjUX_mqjcg-aZow&s" alt="Foto de Korey Cooper">
+                        </div>
+                        <div class="member-info">
+                            <h3>Korey Cooper</h3>
+                            <p>Guitarrista y tecladista</p>
+                        </div>
+                    </a>
                 </div>
                 <div class="member-card">
-                    <div class="member-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcaa4w0TpWxe7MIOHGnfQoLz6HZzqJCQetA&s" alt="Foto de Jen Ledger">
-                    </div>
-                    <div class="member-info">
-                        <h3>Jen Ledger</h3>
-                        <p>Baterista y vocalista</p>
-                    </div>
+                    <a href="miembro.html?nombre=JenLedger" class="member-link">
+                        <div class="member-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcaa4w0TpWxe7MIOHGnfQoLz6HZzqJCQetA&s" alt="Foto de Jen Ledger">
+                        </div>
+                        <div class="member-info">
+                            <h3>Jen Ledger</h3>
+                            <p>Baterista y vocalista</p>
+                        </div>
+                    </a>
                 </div>
                 <div class="member-card">
-                    <div class="member-img">
-                        <img src="https://m.media-amazon.com/images/M/MV5BMTYxMTcxOTktYjJhYS00ZWRhLWE4ZWEtYWYxYmYwNjMzM2MxXkEyXkFqcGc@._V1_.jpg" alt="Foto de Seth Morrison">
-                    </div>
-                    <div class="member-info">
-                        <h3>Seth Morrison</h3>
-                        <p>Guitarrista principal</p>
-                    </div>
+                    <a href="miembro.html?nombre=SethMorrison" class="member-link">
+                        <div class="member-img">
+                            <img src="https://m.media-amazon.com/images/M/MV5BMTYxMTcxOTktYjJhYS00ZWRhLWE4ZWEtYWYxYmYwNjMzM2MxXkEyXkFqcGc@._V1_.jpg" alt="Foto de Seth Morrison">
+                        </div>
+                        <div class="member-info">
+                            <h3>Seth Morrison</h3>
+                            <p>Guitarrista principal</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
+
+    <style>
+        /* ... tus estilos existentes ... */
+
+        /* Nuevo estilo para que toda la tarjeta sea clickable */
+        .member-card a.member-link {
+            display: block; /* Hace que el enlace ocupe todo el espacio de la tarjeta */
+            text-decoration: none; /* Quita el subrayado del enlace */
+            color: inherit; /* Hereda el color del texto para que no sea el azul por defecto */
+        }
+        
+        .member-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* ... el resto de tus estilos ... */
+    </style>
 
     <section id="discography" class="discography">
         <div class="container">
@@ -926,7 +951,7 @@
                     </div>
                 </div>
                 <div class="song-item">
-                    <div class="song-header" style="background-image: url('http://googleusercontent.com/image_generation_content/0');">
+                    <div class="song-header" style="background-image: url('savior.png');">
                         <h3>6. Savior</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
