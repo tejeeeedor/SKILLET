@@ -1,11 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skillet - Banda Oficial</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* --- ESTILOS PARA LA SECCIÓN DE CONTACTO (Añadidos para Flexbox) --- */
+        .contact-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+        }
+        
+        .contact-info, .contact-form-container {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .contact-info i {
+            color: #e10600;
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .social-links {
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            color: #f0f0f0;
+            font-size: 2em;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #e10600;
+        }
+
+        /* Estilos del Formulario */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #e10600;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #0a0a0a;
+            color: white;
+            font-size: 1em;
+            resize: vertical;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+        }
+
+        .contact-form button {
+            background-color: #e10600;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #ff3300;
+        }
+
+        @media (max-width: 768px) {
+            .contact-content {
+                flex-direction: column;
+            }
+        }
+
         /* Estilos generales */
         * {
             margin: 0;
@@ -13,32 +102,34 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: #0a0a0a;
             color: #f0f0f0;
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         section {
             padding: 60px 0;
         }
-        
-        h1, h2, h3 {
+
+        h1,
+        h2,
+        h3 {
             color: #e10600;
             margin-bottom: 20px;
         }
-        
+
         p {
             margin-bottom: 15px;
         }
-        
+
         /* Header */
         header {
             background-color: #111;
@@ -47,14 +138,14 @@
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
-        
+
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
         }
-        
+
         .logo {
             font-size: 28px;
             font-weight: bold;
@@ -62,31 +153,31 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-        
+
         .nav-links {
             display: flex;
             list-style: none;
         }
-        
+
         .nav-links li {
             margin-left: 30px;
         }
-        
+
         .nav-links a {
             color: #f0f0f0;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
-        
+
         .nav-links a:hover {
             color: #e10600;
         }
-        
+
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url(skillet-portada.png);
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url(skillet-portada.png);
             background-size: cover;
             background-position: center;
             height: 80vh;
@@ -94,19 +185,19 @@
             align-items: center;
             text-align: center;
         }
-        
+
         .hero-content h1 {
             font-size: 4rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
         }
-        
+
         .hero-content p {
             font-size: 1.5rem;
             max-width: 700px;
             margin: 0 auto 30px;
         }
-        
+
         .btn {
             display: inline-block;
             background-color: #e10600;
@@ -119,33 +210,33 @@
             border: none;
             cursor: pointer;
         }
-        
+
         .btn:hover {
             background-color: #b30500;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(225, 6, 0, 0.4);
         }
-        
+
         .btn-store {
             background-color: #333;
             margin-left: 10px;
         }
-        
+
         .btn-store:hover {
             background-color: #444;
         }
-        
+
         /* About Section */
         .about {
             background-color: #111;
         }
-        
+
         .section-title {
             text-align: center;
             margin-bottom: 50px;
             position: relative;
         }
-        
+
         .section-title::after {
             content: '';
             display: block;
@@ -154,14 +245,14 @@
             background-color: #e10600;
             margin: 10px auto;
         }
-        
+
         /* Members Section */
         .members-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
-        
+
         .member-card {
             background-color: #1a1a1a;
             border-radius: 10px;
@@ -169,140 +260,70 @@
             transition: transform 0.3s;
             text-align: center;
         }
-        
+
         .member-card:hover {
             transform: translateY(-10px);
         }
-        
+
         .member-img {
             height: 250px;
-            background-color: #333; /* Fondo de fallback */
+            background-color: #333;
+            /* Fondo de fallback */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 60px; /* Tamaño del icono de fallback */
-            color: #e10600; /* Color del icono de fallback */
-            overflow: hidden; /* Asegurar que la imagen no se desborde */
+            font-size: 60px;
+            /* Tamaño del icono de fallback */
+            color: #e10600;
+            /* Color del icono de fallback */
+            overflow: hidden;
+            /* Asegurar que la imagen no se desborde */
         }
 
-        .member-img img { /* Estilo para las imágenes de los miembros */
+        .member-img img {
+            /* Estilo para las imágenes de los miembros */
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Recortar la imagen para que cubra el espacio */
-            display: block; /* Eliminar espacio extra debajo de la imagen */
+            object-fit: cover;
+            /* Recortar la imagen para que cubra el espacio */
+            display: block;
+            /* Eliminar espacio extra debajo de la imagen */
         }
-        
+
         .member-info {
             padding: 20px;
         }
         
-        /* Discography Section */
-        .discography {
-            background-color: #111;
-        }
-        
-        .albums-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        
-        .album-card {
-            background-color: #1a1a1a;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-        
-        .album-card:hover {
-            transform: scale(1.03);
-        }
-        
-        .album-cover {
-            height: 200px;
-            background-color: #333; /* Fondo de fallback */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px; /* Tamaño del icono de fallback */
-            color: #e10600; /* Color del icono de fallback */
-            overflow: hidden;
+        /* Nuevo estilo para que toda la tarjeta sea clickable */
+        .member-card a.member-link {
+            display: block;
+            /* Hace que el enlace ocupe todo el espacio de la tarjeta */
+            text-decoration: none;
+            /* Quita el subrayado del enlace */
+            color: inherit;
+            /* Hereda el color del texto para que no sea el azul por defecto */
         }
 
-        .album-cover img { /* Estilo para las portadas de los álbumes */
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .album-info {
-            padding: 10px 15px; /* Reducido para hacer espacio */
-        }
-
-        /* Estilos para el Acordeón de Canciones (details/summary) */
-        .song-list-toggle {
-            display: block;
-            cursor: pointer;
-            color: #e10600;
-            font-weight: bold;
+        /* Discography Preview Section (Simplificada) */
+        .discography-preview {
             text-align: center;
-            padding: 5px 0 10px 0;
-            border-top: 1px solid #333;
-            margin-top: 5px;
         }
 
-        .song-list-toggle summary {
-            list-style: none;
-            outline: none;
+        .discography-preview .btn {
+            margin-top: 20px;
         }
 
-        .song-list-toggle summary::-webkit-details-marker {
-            display: none;
-        }
 
-        .song-list-toggle summary::after {
-            content: ' Mostrar Canciones ▼';
-            display: inline-block;
-            transition: transform 0.3s;
-            font-size: 0.9em;
-            color: #aaa;
-        }
-
-        .song-list-toggle[open] summary::after {
-            content: ' Ocultar Canciones ▲';
-        }
-
-        .song-list-content {
-            padding: 10px 15px 15px 15px;
-            font-size: 0.9em;
-        }
-
-        .song-list-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .song-list-content li {
-            border-bottom: 1px dotted #333;
-            padding: 5px 0;
-        }
-
-        .song-list-content li:last-child {
-            border-bottom: none;
-        }
-        
         /* Store Preview Section */
         .store-preview {
-            background-color: #111;
+            background-color: #1a1a1a;
             text-align: center;
         }
-        
+
         .store-preview h2 {
             margin-bottom: 40px;
         }
-        
+
         .store-cta {
             font-size: 1.2rem;
             margin-bottom: 40px;
@@ -310,136 +331,56 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
-        /* Top Songs Section */
-        .songs-list {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .song-item {
-            background-color: #1a1a1a;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-        
-        .song-item:hover {
-            transform: translateX(10px);
-        }
-        
-        .song-header {
-            background-color: #e10600; /* Fondo de fallback */
-            padding: 15px 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative; /* Necesario para la imagen de fondo */
-            background-size: cover;
-            background-position: center;
-            min-height: 80px; /* Para que la imagen se vea bien si no hay texto */
-            color: white; /* Para que el texto sea legible sobre la imagen */
-        }
 
-        .song-header::before { /* Capa oscura para que el texto sea legible */
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Opacidad de 50% */
-            z-index: 1;
-        }
-
-        .song-header h3, .song-header i {
-            position: relative;
-            z-index: 2; /* Asegurar que el texto y el icono estén por encima de la capa oscura */
-        }
-        
-        .song-content {
-            padding: 20px;
-            display: none;
-        }
-        
-        .song-item.active .song-content {
-            display: block;
-        }
-        
         /* Footer */
         footer {
             background-color: #111;
             padding: 50px 0 20px;
             text-align: center;
+            border-top: 1px solid #222;
         }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: #333;
-            color: white;
-            border-radius: 50%;
-            margin: 0 10px;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        
-        .social-links a:hover {
-            background-color: #e10600;
-            transform: translateY(-5px);
-        }
-        
+
         .copyright {
             color: #777;
             font-size: 0.9rem;
             margin-top: 20px;
         }
-        
+
         /* Responsive */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
             }
-            
+
             .nav-links {
                 margin-top: 20px;
             }
-            
+
             .nav-links li {
                 margin: 0 10px;
             }
-            
+
             .hero-content h1 {
                 font-size: 2.5rem;
             }
-            
+
             .hero-content p {
                 font-size: 1.2rem;
             }
-            
+
             .hero-buttons {
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
             }
-            
+
             .hero-buttons .btn {
                 margin: 5px 0;
             }
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -448,8 +389,9 @@
                 <ul class="nav-links">
                     <li><a href="#about">Inicio</a></li>
                     <li><a href="#members">Miembros</a></li>
-                    <li><a href="#discography">Discografía</a></li>
-                    <li><a href="#songs">Canciones</a></li>
+                    <li><a href="gira.html">Gira</a></li>
+                    <li><a href="discografia.html">Discografía</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
                     <li><a href="tienda.html" target="_blank">Tienda</a></li>
                     <li><a href="#contact">Contacto</a></li>
                 </ul>
@@ -463,7 +405,7 @@
                 <h1>SKILLET</h1>
                 <p>Música que inspira y transforma</p>
                 <div class="hero-buttons">
-                    <a href="#discog raphy" class="btn">Escuchar Música</a>
+                    <a href="discografia.html" class="btn">Escuchar Música</a>
                     <a href="tienda.html" target="_blank" class="btn btn-store">Visitar Tienda</a>
                 </div>
             </div>
@@ -473,8 +415,12 @@
     <section id="about" class="about">
         <div class="container">
             <h2 class="section-title">Sobre Skillet</h2>
-            <p>Skillet es una banda de rock cristiano y metal cristiano originaria de Tennessee, fundada en 1996 y conformada por John y Korey Cooper, Seth Morrison y Jen Ledger. El grupo ha publicado Doce álbumes de estudio, el más reciente, Revolution, en el 2024. Dos de sus discos, Collide y Comatose recibieron nominación al Grammy.</p>
-            <p>El sonido de la banda se ha descrito como rock alternativo, hard rock, y rock sinfónico, y ha sido caracterizada por elementos electrónicos.</p>
+            <p>Skillet es una banda de rock cristiano y metal cristiano originaria de Tennessee, fundada en 1996 y
+                conformada por John y Korey Cooper, Seth Morrison y Jen Ledger. El grupo ha publicado Doce álbumes de
+                estudio, el más reciente, Revolution, en el 2024. Dos de sus discos, Collide y Comatose recibieron
+                nominación al Grammy.</p>
+            <p>El sonido de la banda se ha descrito como rock alternativo, hard rock, y rock sinfónico, y ha sido
+                caracterizada por elementos electrónicos.</p>
         </div>
     </section>
 
@@ -485,7 +431,8 @@
                 <div class="member-card">
                     <a href="miembro.html?nombre=JohnCooper" class="member-link">
                         <div class="member-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbPmU0fxqkDskRmxErgMJp2vrjf2eblI_zKQ&s" alt="Foto de John Cooper">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbPmU0fxqkDskRmxErgMJp2vrjf2eblI_zKQ&s"
+                                alt="Foto de John Cooper">
                         </div>
                         <div class="member-info">
                             <h3>John Cooper</h3>
@@ -496,7 +443,8 @@
                 <div class="member-card">
                     <a href="miembro.html?nombre=KoreyCooper" class="member-link">
                         <div class="member-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_BCC2ITPDrAiwBez5kqOEjUX_mqjcg-aZow&s" alt="Foto de Korey Cooper">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_BCC2ITPDrAiwBez5kqOEjUX_mqjcg-aZow&s"
+                                alt="Foto de Korey Cooper">
                         </div>
                         <div class="member-info">
                             <h3>Korey Cooper</h3>
@@ -507,7 +455,8 @@
                 <div class="member-card">
                     <a href="miembro.html?nombre=JenLedger" class="member-link">
                         <div class="member-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcaa4w0TpWxe7MIOHGnfQoLz6HZzqJCQetA&s" alt="Foto de Jen Ledger">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcaa4w0TpWxe7MIOHGnfQoLz6HZzqJCQetA&s"
+                                alt="Foto de Jen Ledger">
                         </div>
                         <div class="member-info">
                             <h3>Jen Ledger</h3>
@@ -518,7 +467,8 @@
                 <div class="member-card">
                     <a href="miembro.html?nombre=SethMorrison" class="member-link">
                         <div class="member-img">
-                            <img src="https://m.media-amazon.com/images/M/MV5BMTYxMTcxOTktYjJhYS00ZWRhLWE4ZWEtYWYxYmYwNjMzM2MxXkEyXkFqcGc@._V1_.jpg" alt="Foto de Seth Morrison">
+                            <img src="https://m.media-amazon.com/images/M/MV5BMTYxMTcxOTktYjJhYS00ZWRhLWE4ZWEtYWYxYmYwNjMzM2MxXkEyXkFqcGc@._V1_.jpg"
+                                alt="Foto de Seth Morrison">
                         </div>
                         <div class="member-info">
                             <h3>Seth Morrison</h3>
@@ -530,492 +480,63 @@
         </div>
     </section>
 
-    <style>
-        /* ... tus estilos existentes ... */
-
-        /* Nuevo estilo para que toda la tarjeta sea clickable */
-        .member-card a.member-link {
-            display: block; /* Hace que el enlace ocupe todo el espacio de la tarjeta */
-            text-decoration: none; /* Quita el subrayado del enlace */
-            color: inherit; /* Hereda el color del texto para que no sea el azul por defecto */
-        }
-        
-        .member-card:hover {
-            transform: translateY(-10px);
-        }
-
-        /* ... el resto de tus estilos ... */
-    </style>
-
-    <section id="discography" class="discography">
+    <section id="discography" class="discography-preview">
         <div class="container">
             <h2 class="section-title">Discografía</h2>
-            <div class="albums-grid">
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://i.pinimg.com/236x/1f/bc/5a/1fbc5a8c4d33c156cf2939303fcefe65.jpg" alt="Portada de Skillet (álbum)">
-                    </div>
-                    <div class="album-info">
-                        <h3>Skillet</h3>
-                        <p>1996</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>I Can</li>
-                                <li>Gasoline</li>
-                                <li>Saturn</li>
-                                <li>My Beautiful Robe</li>
-                                <li>Promise Blender</li>
-                                <li>Paint</li>
-                                <li>Safe With You</li>
-                                <li>You Thought</li>
-                                <li>Boundaries</li>
-                                <li>Splinter</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://m.media-amazon.com/images/I/81xIH-ks5+L._UF894,1000_QL80_.jpg" alt="Portada de Hey You, I Love Your Soul">
-                    </div>
-                    <div class="album-info">
-                        <h3>Hey You, I Love Your Soul</h3>
-                        <p>1998</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>Hey You, I Love Your Soul</li>
-                                <li>Locked in a Cage</li>
-                                <li>More Faithful</li>
-                                <li>Suspended In You</li>
-                                <li>Take</li>
-                                <li>Whirlwind</li>
-                                <li>You're in My Brain</li>
-                                <li>Cover Me</li>
-                                <li>Dive Over In</li>
-                                <li>The Best Kept Secret</li>
-                                <li>Heaven in My Veins</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-                
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://i.ytimg.com/vi/WmtagTeGQ3Y/sddefault.jpg" alt="Portada de Invincible">
-                    </div>
-                    <div class="album-info">
-                        <h3>Invincible</h3>
-                        <p>2000</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>Best Kept Secret</li>
-                                <li>Invincible</li>
-                                <li>You're Powerful</li>
-                                <li>Come On to the Future</li>
-                                <li>Rest</li>
-                                <li>The One</li>
-                                <li>You Take My Rights Away</li>
-                                <li>Shout to the Lord</li>
-                                <li>Your Name Is Holy</li>
-                                <li>Each Other</li>
-                                <li>The Fire Breathers</li>
-                                <li>Safe with You (2000 Version)</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-                
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://i.discogs.com/pU5B3r8JqpRrBNdNl-vhjFcOlyliLTvBuAbVdnuIQYU/rs:fit/g:sm/q:40/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNzYz/NTgtMTc0MDk3MDcw/MS01NzA0LmpwZWc.jpeg" alt="Portada de Alien Youth">
-                    </div>
-                    <div class="album-info">
-                        <h3>Alien Youth</h3>
-                        <p>2001</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>Alien Youth</li>
-                                <li>Eating Me Away</li>
-                                <li>Rippin' Me Off</li>
-                                <li>Stronger</li>
-                                <li>You Are My Hope</li>
-                                <li>Earth Invasion</li>
-                                <li>Kill Me, Heal Me</li>
-                                <li>Vapor</li>
-                                <li>One Real Thing</li>
-                                <li>The Thirst Is Taking Over</li>
-                                <li>Will You Be There (Falling Down)</li>
-                                <li>Come On to the Future (Intro)</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/8/82/Collide_%28album%29.jpg" alt="Portada de Collide">
-                    </div>
-                    <div class="album-info">
-                        <h3>Collide</h3>
-                        <p>2003</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>Forsaken</li>
-                                <li>My Obsession</li>
-                                <li>Savior</li>
-                                <li>Open Wounds</li>
-                                <li>Under My Skin</li>
-                                <li>Collide</li>
-                                <li>A Little More</li>
-                                <li>Cycle Down</li>
-                                <li>Fingernails</li>
-                                <li>Energy</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://cdn-images.dzcdn.net/images/cover/68378d9058edc787fdc08ef51e933b4e/0x1900-000000-80-0-0.jpg" alt="Portada de Comatose">
-                    </div>
-                    <div class="album-info">
-                        <h3>Comatose</h3>
-                        <p>2006</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>Rebirthing</li>
-                                <li>Whispers in the Dark</li>
-                                <li>The Older I Get</li>
-                                <li>The Last Night</li>
-                                <li>Comatose</li>
-                                <li>Better than Drugs</li>
-                                <li>Those Nights</li>
-                                <li>Falling Inside the Black</li>
-                                <li>Say Goodbye</li>
-                                <li>Live Free or Let Me Die</li>
-                                <li>Awake and Alive (Bonus Track)</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://cdn-images.dzcdn.net/images/cover/276bd91f166420098aeeb09847bcccd2/1900x1900-000000-80-0-0.jpg" alt="Portada de Awake">
-                    </div>
-                    <div class="album-info">
-                        <h3>Awake</h3>
-                        <p>2009</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>Awake and Alive</li>
-                                <li>Hero</li>
-                                <li>Monster</li>
-                                <li>One Day Too Late</li>
-                                <li>Don't Wake Me</li>
-                                <li>It's Not Me, It's You</li>
-                                <li>Should've When You Could've</li>
-                                <li>Forgiven</li>
-                                <li>Never Surrender</li>
-                                <li>Falling Inside The Black</li>
-                                <li>Lucy</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://cdn-images.dzcdn.net/images/cover/8371d7162676a323868ca2e2f5cf4fc4/1900x1900-000000-80-0-0.jpg" alt="Portada de Rise">
-                    </div>
-                    <div class="album-info">
-                        <h3>Rise</h3>
-                        <p>2013</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>Rise</li>
-                                <li>Sick of It</li>
-                                <li>Good to Be Alive</li>
-                                <li>Not Gonna Die</li>
-                                <li>Circus for a Psycho</li>
-                                <li>American Noise</li>
-                                <li>Madness in Me</li>
-                                <li>Salvation</li>
-                                <li>Fire and Fury</li>
-                                <li>My Religion</li>
-                                <li>Hard to Find</li>
-                                <li>What I Believe</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://www.lahiguera.net/musicalia/artistas/skillet/disco/7749/skillet_unleashed-portada.jpg" alt="Portada de Unleashed">
-                    </div>
-                    <div class="album-info">
-                        <h3>Unleashed</h3>
-                        <p>2016</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>Feel Invincible</li>
-                                <li>The Resistance</li>
-                                <li>Back From The Dead</li>
-                                <li>Stars</li>
-                                <li>I Want To Live</li>
-                                <li>Undefeated</li>
-                                <li>Famous</li>
-                                <li>Lions</li>
-                                <li>Out of Hell</li>
-                                <li>Burn It Down</li>
-                                <li>Brave</li>
-                                <li>You Get Me High</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://www.lahiguera.net/musicalia/artistas/skillet/disco/9892/skillet_victorious-portada.jpg" alt="Portada de Victorious">
-                    </div>
-                    <div class="album-info">
-                        <h3>Victorious</h3>
-                        <p>2019</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>Legendary</li>
-                                <li>You Ain't Ready</li>
-                                <li>Victorious</li>
-                                <li>This is the Kingdom</li>
-                                <li>Save Me</li>
-                                <li>Rise Up</li>
-                                <li>Terrify the Dark</li>
-                                <li>Anchor</li>
-                                <li>Nightingale</li>
-                                <li>Reach</li>
-                                <li>Dreaming of Eden</li>
-                                <li>Back to Life</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-                
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://www.lahiguera.net/musicalia/artistas/skillet/disco/11895/skillet_dominion-portada.jpg" alt="Portada de Dominion">
-                    </div>
-                    <div class="album-info">
-                        <h3>Dominion</h3>
-                        <p>2022</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>Surviving the Game</li>
-                                <li>Standing in the Fire</li>
-                                <li>Refuge</li>
-                                <li>Shout Em Down</li>
-                                <li>Dominion</li>
-                                <li>Valley of Death</li>
-                                <li>Beyond Incredible</li>
-                                <li>Destiny</li>
-                                <li>Radiant</li>
-                                <li>Forever or the End</li>
-                                <li>Ignite</li>
-                                <li>White Horse</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="album-card">
-                    <div class="album-cover">
-                        <img src="https://cdn-images.dzcdn.net/images/cover/6a4e5c77e0bf66a1af1d9e03a4d9ad91/0x1900-000000-80-0-0.jpg" alt="Portada de Revolution">
-                    </div>
-                    <div class="album-info">
-                        <h3>Revolution</h3>
-                        <p>2024</p>
-                    </div>
-                    <details class="song-list-toggle">
-                        <summary></summary>
-                        <div class="song-list-content">
-                            <ul>
-                                <li>In the Revolution</li>
-                                <li>Loud and Clear</li>
-                                <li>The Forever Right</li>
-                                <li>Set It Off</li>
-                                <li>Running Out of Time</li>
-                                <li>What the Fire Started</li>
-                                <li>Invincible God</li>
-                                <li>Breathe</li>
-                                <li>Standing on the Ashes</li>
-                                <li>The Mountain</li>
-                            </ul>
-                        </div>
-                    </details>
-                </div>
-            </div>
+            <p class="store-cta">¡Explora todos los álbumes de Skillet, desde 1996 hasta su último lanzamiento! Consulta las listas de canciones, fechas y enlaces de escucha.</p>
+            <a href="discografia.html" class="btn">Ver Discografía Completa</a>
         </div>
     </section>
-
+    
     <section id="store-preview" class="store-preview">
         <div class="container">
-            <h2 class="section-title">Tienda Oficial Skillet</h2>
-            <p class="store-cta">Descubre productos exclusivos de Skillet: camisetas, discos, accesorios y mucho más. Todo oficial y de la mejor calidad.</p>
-            <a href="tienda.html" target="_blank" class="btn">Visitar Tienda Completa</a>
+            <h2 class="section-title">¡Merchandising y Más!</h2>
+            <p class="store-cta">Encuentra camisetas, vinilos y artículos exclusivos de Skillet. Visita nuestra tienda oficial.</p>
+            <a href="tienda.html" target="_blank" class="btn">Ir a la Tienda</a>
         </div>
     </section>
 
-    <section id="songs" class="songs">
+    <section id="contact">
         <div class="container">
-            <h2 class="section-title">Top Canciones de Skillet</h2>
-            <div class="songs-list">
-                <div class="song-item">
-                    <div class="song-header" style="background-image: url('https://visionarylightshows.com/cdn/shop/files/skillet_1dbea504-c819-4676-902b-8fcf0165b1a4_300x300.jpg?v=1715529805');">
-                        <h3>1. Monster</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="song-content">
-                        <p>La canción fue publicada como sencillo el 14 de julio de 2009 ocupando importantes lugares en las listas de éxitos. Por un lado, llegó al #4 tanto en el Conteo Activo de Rock, como en el Mainstream Rock, y por el otro, se convirtió en el primer sencillo del grupo en ingresar a la Lista Alternativa de Billboard, ocupando el puesto 28.</p>
-                    </div>
-                </div>
-                <div class="song-item">
-                    <div class="song-header" style="background-image: url('https://i.pinimg.com/736x/36/14/51/3614514f075874f0b79e4571c127192e.jpg');">
-                        <h3>2. Hero</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="song-content">
-                        <p>Se publicó como sencillo el 19 de mayo de 2009. La canción marcó el inicio de un gran suceso comercial que Skillet experimentaría con el álbum Awake. «Hero» ocupó el #1 en el Listado de Canciones Cristianas Contemporáneas de Billboard, y el #1 en la lista de Rock Cristiano.</p>
+            <h2 class="section-title">Contacto y Redes Sociales</h2>
+            
+            <div class="contact-content">
+                
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <p><i class="fa-solid fa-envelope"></i> Email: info@skilletfansite.com</p>
+                    <p><i class="fa-solid fa-location-dot"></i> Sede principal: Nashville, TN, USA</p>
+                    <p><i class="fa-solid fa-briefcase"></i> Para prensa y negocios: management@skillet.com</p>
+                    
+                    <h3 style="margin-top: 40px;">Síguenos</h3>
+                    <div class="social-links">
+                        <a href="#" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="song-item">
-                    <div class="song-header" style="background-image: url('https://cdn-images.dzcdn.net/images/cover/b90ae7dbcefa80b301e04a846f968d6c/0x1900-000000-80-0-0.jpg');">
-                        <h3>3. Feel Invincible</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="song-content">
-                        <p>Fue lanzado como primer sencillo del noveno disco de la banda, Unleashed. La canción llegó al #1 de la lista de Rock Cristiano, y se convirtió en el primer sencillo de Skillet en llegar a lo más alto del listado Mejores Canciones Cristanas de Billboard. «Feel Invincible» habla acerca de cómo el poder de Dios nos hace sentir invencibles.</p>
-                    </div>
+                
+                <div class="contact-form-container">
+                    <h3>Envíanos un Mensaje</h3>
+                    <form class="contact-form" action="mailto:info@skilletfansite.com" method="post" enctype="text/plain">
+                        <input type="text" name="name" placeholder="Tu Nombre Completo" required>
+                        <input type="email" name="email" placeholder="Tu Email" required>
+                        <input type="text" name="subject" placeholder="Asunto del Mensaje" required>
+                        <textarea name="body" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                        
+                        <button type="submit">Enviar Mensaje</button>
+                    </form>
                 </div>
-                <div class="song-item">
-                    <div class="song-header" style="background-image: url('https://cdn-images.dzcdn.net/images/cover/276bd91f166420098aeeb09847bcccd2/1900x1900-000000-80-0-0.jpg');">
-                        <h3>4. Awake and Alive</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="song-content">
-                        <p>Producida por Howard Benson, «Awake and Alive» se lanzó el 15 de febrero de 2010 como tercer sencillo de Awake. La canción ocupó el puesto #3 del Listado Principal de Canciones Cristianas de Billboard, y llegó al número 13 de la Lista de Rock Alternativo. Al referirse al significado del tema, Cooper comentó: «Aunque sientas que todos los que te rodean están tratando de quitarte la esperanza, nadie tiene derecho de hacer eso y no debes permitir que esas influencias negativas te agobien. Vive lo que crees y no tengas miedo de defender tu fe».</p>
-                    </div>
-                </div>
-                <div class="song-item">
-                    <div class="song-header" style="background-image: url('https://m.media-amazon.com/images/I/51qKlkoR3bL._UXNaN_FMjpg_QL85_.jpg');">
-                        <h3>5. Whisper in the Dark</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="song-content">
-                        <p>Hay momentos en las que las circunstancias difíciles de la vida nos hacen sentir como si todo a nuestro alrededor estuviera oscuro. Y aunque pareciera que estamos solos en las pruebas, es bueno saber que Dios siempre esta a nuestro lado para pelear nuestras batallas; por lo menos esto es lo que buscó plasmar John Cooper al escribir «Whispers in the Dark». La canción fue #1 en la Lista de Rock Cristiano de Billboard, y ocupó el puesto 37 en el Mainstream Rock, obteniendo el Disco de Platino por sus ventas.</p>
-                    </div>
-                </div>
-                <div class="song-item">
-                    <div class="song-header" style="background-image: url('savior.png');">
-                        <h3>6. Savior</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="song-content">
-                        <p>En 2004, Skillet publicó «Savior», el primer corte promocional de su octavo disco Collide. Fue la primera canción de la banda en alcanzar las listas seculares, al llegar al #26 del Mainstream Rock de Billboard. John Cooper ha comentado que la canción habla de su niñez, una etapa que fue marcada por la mala relación con su padre</p>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
 
-    <footer id="contact">
+    <footer>
         <div class="container">
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-spotify"></i></a>
-            </div>
-            <p class="copyright">&copy; 2023 Skillet. Todos los derechos reservados.</p>
+            <p class="copyright">&copy; 2025 Skillet Fan Site. Todos los derechos reservados. | Diseñado con pasión.</p>
         </div>
     </footer>
-
-    <script>
-        // Script para las canciones desplegables (Sección Top Canciones)
-        document.querySelectorAll('.song-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const songItem = header.closest('.song-item'); 
-                
-                // Toggle de la clase 'active' para mostrar/ocultar el contenido
-                songItem.classList.toggle('active');
-                
-                const icon = header.querySelector('i');
-                
-                // Cambiar el ícono
-                if (songItem.classList.contains('active')) {
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-up');
-                } else {
-                    icon.classList.remove('fa-chevron-up');
-                    icon.classList.add('fa-chevron-down');
-                }
-            });
-        });
-        
-        // Smooth scrolling para los enlaces del menú
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    // Ajustamos el desplazamiento para compensar la altura del header sticky (80px)
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80, 
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
