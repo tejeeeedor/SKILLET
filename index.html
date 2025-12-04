@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillet - Banda Oficial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- ESTILOS PARA LA SECCIÓN DE CONTACTO (Añadidos para Flexbox) --- */
+        .contact-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+        }
+        
+        .contact-info, .contact-form-container {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .contact-info i {
+            color: #e10600;
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .social-links {
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            color: #f0f0f0;
+            font-size: 2em;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #e10600;
+        }
+
+        /* Estilos del Formulario */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #e10600;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #0a0a0a;
+            color: white;
+            font-size: 1em;
+            resize: vertical;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+        }
+
+        .contact-form button {
+            background-color: #e10600;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #ff3300;
+        }
+
+        @media (max-width: 768px) {
+            .contact-content {
+                flex-direction: column;
+            }
+        }
+
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #e10600;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Header */
+        header {
+            background-color: #111;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e10600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #e10600;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url(skillet-portada.png);
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #e10600;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #b30500;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(225, 6, 0, 0.4);
+        }
+
+        .btn-store {
+            background-color: #333;
+            margin-left: 10px;
+        }
+
+        .btn-store:hover {
+            background-color: #444;
+        }
+
+        /* About Section */
+        .about {
+            background-color: #111;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #e10600;
+            margin: 10px auto;
+        }
+
+        /* Members Section */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .member-card {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-img {
+            height: 250px;
+            background-color: #333;
+            /* Fondo de fallback */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            /* Tamaño del icono de fallback */
+            color: #e10600;
+            /* Color del icono de fallback */
+            overflow: hidden;
+            /* Asegurar que la imagen no se desborde */
+        }
+
+        .member-img img {
+            /* Estilo para las imágenes de los miembros */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Recortar la imagen para que cubra el espacio */
+            display: block;
+            /* Eliminar espacio extra debajo de la imagen */
+        }
+
+        .member-info {
+            padding: 20px;
+        }
+        
+        /* Nuevo estilo para que toda la tarjeta sea clickable */
+        .member-card a.member-link {
+            display: block;
+            /* Hace que el enlace ocupe todo el espacio de la tarjeta */
+            text-decoration: none;
+            /* Quita el subrayado del enlace */
+            color: inherit;
+            /* Hereda el color del texto para que no sea el azul por defecto */
+        }
+
+        /* Discography Preview Section (Simplificada) */
+        .discography-preview {
+            text-align: center;
+        }
+
+        .discography-preview .btn {
+            margin-top: 20px;
+        }
+
+
+        /* Store Preview Section */
+        .store-preview {
+            background-color: #1a1a1a;
+            text-align: center;
+        }
+
+        .store-preview h2 {
+            margin-bottom: 40px;
+        }
+
+        .store-cta {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            padding: 50px 0 20px;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                margin-top: 20px;
+            }
+
+            .nav-links li {
+                margin: 0 10px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero-buttons .btn {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">SKILLET</div>
+                <ul class="nav-links">
+                    <li><a href="#about">Inicio</a></li>
+                    <li><a href="#members">Miembros</a></li>
+                    <li><a href="gira.html">Gira</a></li>
+                    <li><a href="discografia.html">Discografía</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
+                    <li><a href="tienda.html" target="_blank">Tienda</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>SKILLET</h1>
+                <p>Música que inspira y transforma</p>
+                <div class="hero-buttons">
+                    <a href="discografia.html" class="btn">Escuchar Música</a>
+                    <a href="tienda.html" target="_blank" class="btn btn-store">Visitar Tienda</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre Skillet</h2>
+            <p>Skillet es una banda de rock cristiano y metal cristiano originaria de Tennessee, fundada en 1996 y
+                conformada por John y Korey Cooper, Seth Morrison y Jen Ledger. El grupo ha publicado Doce álbumes de
+                estudio, el más reciente, Revolution, en el 2024. Dos de sus discos, Collide y Comatose recibieron
+                nominación al Grammy.</p>
+            <p>El sonido de la banda se ha descrito como rock alternativo, hard rock, y rock sinfónico, y ha sido
+                caracterizada por elementos electrónicos.</p>
+        </div>
+    </section>
+
+    <section id="members" class="members">
+        <div class="container">
+            <h2 class="section-title">Miembros</h2>
+            <div class="members-grid">
+                <div class="member-card">
+                    <a href="miembro.html?nombre=JohnCooper" class="member-link">
+                        <div class="member-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbPmU0fxqkDskRmxErgMJp2vrjf2eblI_zKQ&s"
+                                alt="Foto de John Cooper">
+                        </div>
+                        <div class="member-info">
+                            <h3>John Cooper</h3>
+                            <p>Vocalista y bajista</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="member-card">
+                    <a href="miembro.html?nombre=KoreyCooper" class="member-link">
+                        <div class="member-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_BCC2ITPDrAiwBez5kqOEjUX_mqjcg-aZow&s"
+                                alt="Foto de Korey Cooper">
+                        </div>
+                        <div class="member-info">
+                            <h3>Korey Cooper</h3>
+                            <p>Guitarrista y tecladista</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="member-card">
+                    <a href="miembro.html?nombre=JenLedger" class="member-link">
+                        <div class="member-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcaa4w0TpWxe7MIOHGnfQoLz6HZzqJCQetA&s"
+                                alt="Foto de Jen Ledger">
+                        </div>
+                        <div class="member-info">
+                            <h3>Jen Ledger</h3>
+                            <p>Baterista y vocalista</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="member-card">
+                    <a href="miembro.html?nombre=SethMorrison" class="member-link">
+                        <div class="member-img">
+                            <img src="https://m.media-amazon.com/images/M/MV5BMTYxMTcxOTktYjJhYS00ZWRhLWE4ZWEtYWYxYmYwNjMzM2MxXkEyXkFqcGc@._V1_.jpg"
+                                alt="Foto de Seth Morrison">
+                        </div>
+                        <div class="member-info">
+                            <h3>Seth Morrison</h3>
+                            <p>Guitarrista principal</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="discography" class="discography-preview">
+        <div class="container">
+            <h2 class="section-title">Discografía</h2>
+            <p class="store-cta">¡Explora todos los álbumes de Skillet, desde 1996 hasta su último lanzamiento! Consulta las listas de canciones, fechas y enlaces de escucha.</p>
+            <a href="discografia.html" class="btn">Ver Discografía Completa</a>
+        </div>
+    </section>
+    
+    <section id="store-preview" class="store-preview">
+        <div class="container">
+            <h2 class="section-title">¡Merchandising y Más!</h2>
+            <p class="store-cta">Encuentra camisetas, vinilos y artículos exclusivos de Skillet. Visita nuestra tienda oficial.</p>
+            <a href="tienda.html" target="_blank" class="btn">Ir a la Tienda</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contacto y Redes Sociales</h2>
+            
+            <div class="contact-content">
+                
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <p><i class="fa-solid fa-envelope"></i> Email: info@skilletfansite.com</p>
+                    <p><i class="fa-solid fa-location-dot"></i> Sede principal: Nashville, TN, USA</p>
+                    <p><i class="fa-solid fa-briefcase"></i> Para prensa y negocios: management@skillet.com</p>
+                    
+                    <h3 style="margin-top: 40px;">Síguenos</h3>
+                    <div class="social-links">
+                        <a href="#" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <h3>Envíanos un Mensaje</h3>
+                    <form class="contact-form" action="mailto:info@skilletfansite.com" method="post" enctype="text/plain">
+                        <input type="text" name="name" placeholder="Tu Nombre Completo" required>
+                        <input type="email" name="email" placeholder="Tu Email" required>
+                        <input type="text" name="subject" placeholder="Asunto del Mensaje" required>
+                        <textarea name="body" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                        
+                        <button type="submit">Enviar Mensaje</button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="copyright">&copy; 2025 Skillet Fan Site. Todos los derechos reservados. | Diseñado con pasión.</p>
+        </div>
+    </footer>
+</body>
+</html>
