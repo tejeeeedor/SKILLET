@@ -223,3 +223,282 @@
     </footer>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias y Blog - Skillet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h2 {
+            color: #e10600;
+            margin-bottom: 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #111;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e10600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #e10600;
+        }
+
+        /* News Section */
+        .news-section {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .news-section h2 {
+            font-size: 3em;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #e10600;
+            display: inline-block;
+            padding-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .news-card {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(225, 6, 0, 0.3);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-content h3 {
+            color: #e10600;
+            font-size: 1.6em;
+            margin-bottom: 10px;
+        }
+
+        .news-meta {
+            color: #aaa;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 10px;
+        }
+
+        .news-meta i {
+            margin-right: 5px;
+        }
+
+        .news-content p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .read-more-btn {
+            display: inline-block;
+            background-color: #444;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .read-more-btn:hover {
+            background-color: #e10600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+        
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            .nav-links {
+                margin-top: 20px;
+            }
+            .nav-links li {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">SKILLET</div>
+                <ul class="nav-links">
+                    <li><a href="index.html#about">Inicio</a></li>
+                    <li><a href="index.html#members">Miembros</a></li>
+                    <li><a href="gira.html">Gira</a></li>
+                    <li><a href="discografia.html">Discografía</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
+                    <li><a href="tienda.html" target="_blank">Tienda</a></li>
+                    <li><a href="index.html#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="news" class="news-section">
+        <div class="container">
+            <h2>Últimas Noticias de Skillet</h2>
+            <div class="news-grid">
+                
+                <article class="news-card">
+                    <img src="https://via.placeholder.com/600x400?text=Nuevo+Album+Skillet" alt="Banda Skillet">
+                    <div class="news-content">
+                        <h3>¡Confirmado! Nuevo Álbum para 2026</h3>
+                        <div class="news-meta">
+                            <i class="fa-regular fa-calendar"></i> Diciembre 3, 2025
+                            <i class="fa-solid fa-tag"></i> Música
+                        </div>
+                        <p>John Cooper ha confirmado que la banda está de vuelta en el estudio preparando su undécimo álbum de estudio. Se espera el lanzamiento para principios de 2026...</p>
+                        <a href="#" class="read-more-btn">Leer más</a>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <img src="https://via.placeholder.com/600x400?text=Spotify+Exito" alt="Spotify Logo">
+                    <div class="news-content">
+                        <h3>'Monster' alcanza los 500 millones de streams</h3>
+                        <div class="news-meta">
+                            <i class="fa-regular fa-calendar"></i> Noviembre 15, 2025
+                            <i class="fa-solid fa-tag"></i> Logros
+                        </div>
+                        <p>El clásico himno de Skillet, "Monster", ha superado la impresionante marca de 500 millones de reproducciones en Spotify, solidificando su estatus como un ícono del rock...</p>
+                        <a href="#" class="read-more-btn">Leer más</a>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <img src="https://via.placeholder.com/600x400?text=Gira+Europea" alt="Concierto de Rock">
+                    <div class="news-content">
+                        <h3>Anunciadas fechas adicionales para la gira de primavera</h3>
+                        <div class="news-meta">
+                            <i class="fa-regular fa-calendar"></i> Octubre 28, 2025
+                            <i class="fa-solid fa-tag"></i> Gira
+                        </div>
+                        <p>Debido a la alta demanda, la banda ha añadido 10 fechas más en Reino Unido y Alemania. ¡Las entradas ya están disponibles en nuestra sección de Gira!...</p>
+                        <a href="#" class="read-more-btn">Leer más</a>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <img src="https://via.placeholder.com/600x400?text=Jen+Ledger+Interview" alt="Jen Ledger Baterista">
+                    <div class="news-content">
+                        <h3>Jen Ledger habla sobre la inspiración para su solo</h3>
+                        <div class="news-meta">
+                            <i class="fa-regular fa-calendar"></i> Octubre 1, 2025
+                            <i class="fa-solid fa-tag"></i> Entrevistas
+                        </div>
+                        <p>Nuestra baterista estrella se sincera sobre cómo desarrolló su icónico solo en "Feel Invincible" y su trabajo con el equipo de producción. ¡No te lo pierdas!...</p>
+                        <a href="#" class="read-more-btn">Leer más</a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="copyright">&copy; 2025 Skillet Fan Site. Todos los derechos reservados. | Diseñado con pasión.</p>
+        </div>
+    </footer>
+</body>
+</html>
