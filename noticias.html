@@ -1,3 +1,228 @@
+<<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias Oficiales Skillet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos generales (basados en tienda.html) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a; /* Fondo oscuro */
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- HEADER DE NOTICIAS --- */
+        .news-header {
+            background-color: #111;
+            padding: 40px 0;
+            text-align: center;
+            border-bottom: 3px solid #e10600; /* Aceno Rojo */
+        }
+
+        .news-header h1 {
+            font-size: 3rem;
+            color: #e10600;
+            margin-bottom: 10px;
+        }
+
+        .news-header p {
+            font-size: 1.2rem;
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background-color: #333;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #444;
+            transform: translateY(-3px);
+        }
+
+        /* --- SECCIÓN DE NOTICIAS --- */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 50px 0;
+        }
+
+        .news-card {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(225, 6, 0, 0.4);
+        }
+
+        .news-image {
+            height: 200px;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: #e10600;
+            position: relative;
+        }
+        
+        /* Imagen de ejemplo con un icono de álbum */
+        .news-image i {
+            font-size: 4rem;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            color: #e10600;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .news-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .news-excerpt {
+            color: #aaa;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        
+        .read-more {
+            color: #00a8ff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: #fff;
+        }
+        
+        /* --- FOOTER (Igual que el de la tienda) --- */
+        .page-footer {
+            background-color: #111;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+        
+        .page-footer p {
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="news-header">
+        <div class="container">
+            <h1>ÚLTIMAS NOTICIAS</h1>
+            <p>Mantente al día con todos los anuncios, giras y lanzamientos de Skillet.</p>
+            <a href="index.html" class="back-btn"><i class="fas fa-home"></i> Volver a la Web Principal</a>
+        </div>
+    </header>
+
+    <section class="news">
+        <div class="container">
+            <div class="news-grid">
+                
+                <div class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">6 de Diciembre, 2025</span>
+                        <h3 class="news-title">¡Anunciada la Gira Europea "Unleashed" 2026!</h3>
+                        <p class="news-excerpt">La banda confirma 15 fechas a través de Europa, con paradas en Madrid, Berlín y París. Las entradas salen a la venta la próxima semana...</p>
+                        <a href="#" class="read-more">Leer más &raquo;</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">15 de Noviembre, 2025</span>
+                        <h3 class="news-title">Estreno de "Invincible Fire" - Escúchalo ya.</h3>
+                        <p class="news-excerpt">El nuevo sencillo ya está disponible en todas las plataformas. El videoclip oficial se estrenará en YouTube mañana a las 10 AM (CET).</p>
+                        <a href="#" class="read-more">Leer más &raquo;</a>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">2 de Noviembre, 2025</span>
+                        <h3 class="news-title">Feliz Cumpleaños a Jen Ledger!</h3>
+                        <p class="news-excerpt">Únete a la celebración del cumpleaños de nuestra increíble baterista. ¡Envía tus mejores deseos en nuestras redes sociales!</p>
+                        <a href="#" class="read-more">Leer más &raquo;</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">20 de Septiembre, 2025</span>
+                        <h3 class="news-title">Álbum "Dominion" Certificado Oro</h3>
+                        <p class="news-excerpt">Estamos emocionados de anunciar que nuestro álbum más reciente ha alcanzado la certificación de Oro en el mercado estadounidense.</p>
+                        <a href="#" class="read-more">Leer más &raquo;</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <footer class="page-footer">
+        <div class="container">
+            <p>&copy; 2024 Skillet. Todos los derechos reservados. | Noticias no oficiales, ejemplo de desarrollo.</p>
+        </div>
+    </footer>
+</body>
+</html>
 <!DOCTYPE html>
 <html lang="es">
 <head>
