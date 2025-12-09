@@ -465,7 +465,7 @@
         .checkout-form-container input[type="text"],
         .checkout-form-container input[type="email"],
         .checkout-form-container input[type="tel"],
-        .checkout-form-container select { /* Añadido SELECT aquí */
+        .checkout-form-container select { 
             width: 100%;
             padding: 12px;
             border: 1px solid #333;
@@ -602,21 +602,103 @@
                     
                     <div class="product-card" data-category="vinilos">
                         <div class="product-img">
-                            <i class="fas fa-record-vinyl"></i>
-                            <div class="product-badge badge-limited">Limitado</div>
+                            <img src="https://m.media-amazon.com/images/I/614SXUJouRL._UF894,1000_QL80_.jpg" alt="Vinilo Revolution">
+                            <div class="product-badge badge-new">Nuevo</div>
                         </div>
                         <div class="product-info">
                             <div class="product-category">Vinilos</div>
-                            <h3 class="product-title">Vinilo "Awake" (180g Negro)</h3>
-                            <p class="product-description">Edición en vinilo negro de 180g. Incluye póster.</p>
-                            <div class="product-price">$32.99</div>
-                            <button class="btn add-to-cart-btn" data-id="101" data-name='Vinilo "Awake"' data-price="32.99" data-img-icon='<i class="fas fa-record-vinyl"></i>'>Añadir al Carrito</button>
+                            <h3 class="product-title">Vinilo "Revolution" (Pre-order)</h3>
+                            <p class="product-description">El esperado nuevo lanzamiento de 2024. Vinilo rojo edición limitada.</p>
+                            <div class="product-price">$29.99</div>
+                            <button class="btn add-to-cart-btn" data-id="101" data-name='Vinilo "Revolution"' data-price="29.99" data-img-icon='<i class="fas fa-record-vinyl"></i>'>Añadir al Carrito</button>
+                        </div>
+                    </div>
+    
+                    <div class="product-card" data-category="vinilos">
+                        <div class="product-img">
+                            <img src="Gemini_Generated_Image_xp8gu6xp8gu6xp8g.png" alt="Vinilo Dominion">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vinilos</div>
+                            <h3 class="product-title">Vinilo "Dominion"</h3>
+                            <p class="product-description">Incluye los éxitos "Surviving the Game" y "Refuge".</p>
+                            <div class="product-price">$22.99</div>
+                            <button class="btn add-to-cart-btn" data-id="102" data-name='Vinilo "Dominion"' data-price="22.99" data-img-icon='<i class="fas fa-record-vinyl"></i>'>Añadir al Carrito</button>
+                        </div>
+                    </div>
+    
+                    <div class="product-card" data-category="vinilos">
+                        <div class="product-img">
+                            <img src="https://muzikercdn.com/uploads/product_gallery/20589/2058970/main_9afae7a8.jpg" alt="Vinilo Victorious">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vinilos</div>
+                            <h3 class="product-title">Vinilo "Victorious"</h3>
+                            <p class="product-description">Edición estándar en negro 180g. Incluye "Legendary".</p>
+                            <div class="product-price">$24.99</div>
+                            <button class="btn add-to-cart-btn" data-id="103" data-name='Vinilo "Victorious"' data-price="24.99" data-img-icon='<i class="fas fa-record-vinyl"></i>'>Añadir al Carrito</button>
+                        </div>
+                    </div>
+    
+                    <div class="product-card" data-category="vinilos">
+                        <div class="product-img">
+                            <img src="Unleashed.png" alt="Vinilo Unleashed">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vinilos</div>
+                            <h3 class="product-title">Vinilo "Unleashed"</h3>
+                            <p class="product-description">El álbum que incluye el éxito mundial "Feel Invincible".</p>
+                            <div class="product-price">$26.99</div>
+                            <button class="btn add-to-cart-btn" data-id="104" data-name='Vinilo "Unleashed"' data-price="26.99" data-img-icon='<i class="fas fa-record-vinyl"></i>'>Añadir al Carrito</button>
+                        </div>
+                    </div>
+    
+                    <div class="product-card" data-category="vinilos" data-ofertas="true">
+                        <div class="product-img">
+                            <img src="data:image/jpeg;base64,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" alt="Vinilo Rise">
+                            <div class="product-badge badge-sale">-10%</div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vinilos</div>
+                            <h3 class="product-title">Vinilo "Rise"</h3>
+                            <p class="product-description">Álbum conceptual aclamado por los fans. Oferta limitada.</p>
+                            <div class="product-price">$26.99 <span class="product-old-price">$29.99</span></div>
+                            <button class="btn add-to-cart-btn" data-id="105" data-name='Vinilo "Rise"' data-price="26.99" data-img-icon='<i class="fas fa-record-vinyl"></i>'>Añadir al Carrito</button>
                         </div>
                     </div>
                     
+                    <div class="product-card" data-category="vinilos">
+                        <div class="product-img">
+                            <img src="https://gcp-images.merchbar.com/eyJidWNrZXQiOiJtZXJjaGJhci1pbWFnZXMiLCJrZXkiOiJwcm9kdWN0L3ZpbnlsaXplZC91cGMvOTcvMDc1Njc4NjY5Nzc0LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTQwMCwiZml0IjoiY292ZXIifX19?format=webp" alt="Vinilo Awake">
+                            <div class="product-badge badge-limited">Clásico</div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vinilos</div>
+                            <h3 class="product-title">Vinilo "Awake"</h3>
+                            <p class="product-description">Incluye los mega éxitos "Monster" y "Hero". Indispensable.</p>
+                            <div class="product-price">$29.99</div>
+                            <button class="btn add-to-cart-btn" data-id="106" data-name='Vinilo "Awake"' data-price="29.99" data-img-icon='<i class="fas fa-record-vinyl"></i>'>Añadir al Carrito</button>
+                        </div>
+                    </div>
+    
+                    <div class="product-card" data-category="vinilos">
+                        <div class="product-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPSuYbg6HV5ffLyBIRqoYWE-clTBhF7yC_Og&s" alt="Vinilo Comatose">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vinilos</div>
+                            <h3 class="product-title">Vinilo "Comatose"</h3>
+                            <p class="product-description">Edición Deluxe. El álbum que definió una era.</p>
+                            <div class="product-price">$28.99</div>
+                            <button class="btn add-to-cart-btn" data-id="107" data-name='Vinilo "Comatose"' data-price="28.99" data-img-icon='<i class="fas fa-record-vinyl"></i>'>Añadir al Carrito</button>
+                        </div>
+                    </div>
+
                     <div class="product-card" data-category="ropa">
                         <div class="product-img">
-                            <i class="fas fa-tshirt"></i>
+                            <img src="https://cdn.media.amplience.net/s/hottopic/10365871_hi?$productMainDesktop$&fmt=auto" alt="Vinilo Comatose">
+
+                           
                             <div class="product-badge badge-new">Nuevo</div>
                         </div>
                         <div class="product-info">
@@ -630,7 +712,8 @@
                     
                     <div class="product-card" data-category="cds" data-ofertas="true">
                         <div class="product-img">
-                            <i class="fas fa-compact-disc"></i>
+                            <img src="Pack 3.png" alt="Vinilo Comatose">
+
                             <div class="product-badge badge-sale">-25%</div>
                         </div>
                         <div class="product-info">
@@ -644,7 +727,7 @@
                     
                     <div class="product-card" data-category="accesorios">
                         <div class="product-img">
-                            <i class="fas fa-mug-hot"></i>
+                            <img src="taza.png" alt="Vinilo Comatose">
                         </div>
                         <div class="product-info">
                             <div class="product-category">Accesorios</div>
@@ -657,7 +740,7 @@
                     
                     <div class="product-card" data-category="paquetes">
                         <div class="product-img">
-                            <i class="fas fa-box"></i>
+                            <img src="pack skillet1.png" alt="Vinilo Comatose">
                             <div class="product-badge">Más Vendido</div>
                         </div>
                         <div class="product-info">
@@ -669,22 +752,9 @@
                         </div>
                     </div>
 
-                    <div class="product-card" data-category="vinilos">
-                        <div class="product-img">
-                            <i class="fas fa-record-vinyl"></i>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Vinilos</div>
-                            <h3 class="product-title">Vinilo "Unleashed" (Doble LP)</h3>
-                            <p class="product-description">Doble vinilo gatefold con letras y fotos exclusivas.</p>
-                            <div class="product-price">$44.99</div>
-                            <button class="btn add-to-cart-btn" data-id="103" data-name='Vinilo "Unleashed"' data-price="44.99" data-img-icon='<i class="fas fa-record-vinyl"></i>'>Añadir al Carrito</button>
-                        </div>
-                    </div>
-
                     <div class="product-card" data-category="cds">
                         <div class="product-img">
-                            <i class="fas fa-compact-disc"></i>
+                            <img src="https://colliderecords.com/cdn/shop/files/Skillet_Dominion_-_Day_of_Destiny_CD_Deluxe.jpg?v=1743358178&width=180" alt="Vinilo Comatose">
                             <div class="product-badge badge-new">Nuevo</div>
                         </div>
                         <div class="product-info">
@@ -698,7 +768,7 @@
 
                     <div class="product-card" data-category="ropa">
                         <div class="product-img">
-                            <i class="fas fa-hoodie"></i>
+                            <img src="sudadera.png" alt="Vinilo Comatose">
                         </div>
                         <div class="product-info">
                             <div class="product-category">Ropa</div>
@@ -711,7 +781,7 @@
 
                     <div class="product-card" data-category="accesorios" data-ofertas="true">
                         <div class="product-img">
-                            <i class="fas fa-key"></i>
+                            <img src="https://fbi.cults3d.com/uploaders/32904958/illustration-file/192d5a2e-e25f-4579-a071-8247749fd815/skillet.png" alt="Vinilo Comatose">
                             <div class="product-badge badge-sale">-10%</div>
                         </div>
                         <div class="product-info">
@@ -774,7 +844,7 @@
                             <option value="DE">Alemania</option>
                             <option value="IT">Italia</option>
                             <option value="PT">Portugal</option>
-                            </select>
+                        </select>
                     </div>
 
                     <h3 style="color: #ccc; font-size: 1.3rem; margin-top: 30px; margin-bottom: 25px;">2. Información de Pago (Simulada)</h3>
@@ -949,7 +1019,6 @@
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
-                // Aseguramos que el ID del objeto en el carrito es un número
                 cart.push({ ...product, id: numericId, quantity: 1 });
             }
 
@@ -958,8 +1027,8 @@
         }
 
         function changeQuantity(id, change) {
-            // AHORA EL ID VIENE COMO NÚMERO DIRECTAMENTE DE LOS BOTONES DEL CARRITO
-            const item = cart.find(item => item.id === id); // El ID ya es un número en el array
+            // El ID viene como número directamente de los botones del carrito
+            const item = cart.find(item => item.id === id); 
             if (item) {
                 item.quantity += change;
                 if (item.quantity <= 0) {
