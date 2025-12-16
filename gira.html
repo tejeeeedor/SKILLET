@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fechas de Gira - Skillet</title>
+    <title>Fechas de Gira - Skillet</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    
     <style>
+        /* --- 1. FUENTES Y ESTILO GENERAL (TEMA ROCKBAND) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Roboto:wght@400;700&display=swap');
+
         /* --- 1. FUENTES Y ESTILO GENERAL (TEMA ROCKBAND) --- */
         @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Roboto:wght@400;700&display=swap');
 
@@ -21,7 +26,19 @@
         /* ================================================= */
 
         /* 1. TEXTURA DE FONDO (FONDO DE LADRILLO A TODA LA PÁGINA) */
+        /* ================================================= */
+        /* === AÑADIDOS CSS PARA ESTILO ORGÁNICO / NO-IA === */
+        /* ================================================= */
+
+        /* 1. TEXTURA DE FONDO (FONDO DE LADRILLO A TODA LA PÁGINA) */
         body {
+            background-image: url('https://i.pinimg.com/originals/9a/6f/fd/9a6ffd67ac28aa3299eb24d3c7cfa34e.jpg');
+            background-repeat: repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-color: #111;
+            color: #cccccc;
+            font-family: 'Roboto', sans-serif;
             background-image: url('https://i.pinimg.com/originals/9a/6f/fd/9a6ffd67ac28aa3299eb24d3c7cfa34e.jpg');
             background-repeat: repeat;
             background-size: cover;
@@ -33,21 +50,31 @@
         }
 
         /* 2. CONTENEDOR PRINCIPAL: Añadimos un fondo oscuro semitransparente para legibilidad */
+
+        /* 2. CONTENEDOR PRINCIPAL: Añadimos un fondo oscuro semitransparente para legibilidad */
         .container {
+            max-width: 1100px;
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
             background-color: rgba(18, 18, 20, 0.85); 
             box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            background-color: rgba(18, 18, 20, 0.85); 
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
         }
+
+        /* 3. HEADER: Mantenemos el estilo agresivo */
 
         /* 3. HEADER: Mantenemos el estilo agresivo */
         header {
             background: linear-gradient(to bottom, #5a0b0b, #380202); 
             border-bottom: 5px solid #e10600; 
+            background: linear-gradient(to bottom, #5a0b0b, #380202); 
+            border-bottom: 5px solid #e10600; 
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.8); 
             box-shadow: 0 8px 15px rgba(0,0,0,0.8); 
         }
         
@@ -56,6 +83,7 @@
             justify-content: space-between;
             align-items: center;
             height: 70px;
+            height: 70px;
         }
         
         .logo {
@@ -63,8 +91,18 @@
             font-size: 38px;
             font-weight: 600;
             color: #e0e0e0;
+            font-family: 'Teko', sans-serif;
+            font-size: 38px;
+            font-weight: 600;
+            color: #e0e0e0;
             text-transform: uppercase;
             letter-spacing: 2px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-image: linear-gradient(180deg, #fff 0%, #ccc 80%, #aaa 100%);
+            color: transparent;
+            text-shadow: 1px 1px 0px #000, 2px 2px 0px #e10600;
             text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
             -webkit-background-clip: text;
             background-clip: text;
@@ -78,9 +116,14 @@
             list-style: none;
             height: 100%;
             align-items: center;
+            height: 100%;
+            align-items: center;
         }
         
         .nav-links li {
+            height: 100%;
+            display: flex;
+            align-items: center;
             height: 100%;
             display: flex;
             align-items: center;
@@ -88,7 +131,18 @@
         
         .nav-links a {
             color: #d1d1d1;
+            color: #d1d1d1;
             text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+            border-right: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
             font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
@@ -375,26 +429,57 @@
         footer {
             background-color: #0a0a0a;
             padding: 40px 0;
+            background-color: #0a0a0a;
+            padding: 40px 0;
             text-align: center;
+            border-top: 5px solid #222;
+            margin-top: 80px;
             border-top: 5px solid #222;
             margin-top: 80px;
         }
 
+
         .copyright {
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
             color: #555;
             font-size: 0.8rem;
             text-transform: uppercase;
         }
 
         /* Responsive */
+        /* Responsive */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
                 height: auto;
                 padding: 15px 0;
+                height: auto;
+                padding: 15px 0;
             }
             .nav-links {
+            .nav-links {
                 flex-direction: column;
+                margin-top: 15px;
+            }
+            .nav-links a {
+                border-right: none;
+                border-bottom: 1px solid #333;
+                width: 100%;
+                justify-content: center;
+                padding: 10px;
+            }
+            
+            .tour-dates-table th, .tour-dates-table td {
+                padding: 10px 5px;
+                font-size: 0.9em;
+            }
+            
+            /* Ocultar algunas columnas en móvil para que quepa */
+            .tour-dates-table th:nth-child(3), 
+            .tour-dates-table td:nth-child(3) {
+                display: none;
                 margin-top: 15px;
             }
             .nav-links a {
@@ -426,7 +511,12 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="miembros.html">Miembros</a></li>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="miembros.html">Miembros</a></li>
                     <li><a href="gira.html">Gira</a></li>
+                    <li><a href="galeria.html">Galería</a></li> 
+                    <li><a href="discografia.html">Discografía</a></li>
+                    <li><a href="tienda.html">Tienda</a></li>
                     <li><a href="galeria.html">Galería</a></li> 
                     <li><a href="discografia.html">Discografía</a></li>
                     <li><a href="tienda.html">Tienda</a></li>
@@ -565,8 +655,10 @@
         </div>
     </section>
     
+    
     <footer>
         <div class="container">
+            <p class="copyright">© 2025 Skillet Fan Site. Todos los derechos reservados. | Diseñado para el rock.</p>
             <p class="copyright">© 2025 Skillet Fan Site. Todos los derechos reservados. | Diseñado para el rock.</p>
         </div>
     </footer>
