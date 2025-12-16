@@ -3,195 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miembro de Skillet</title>
+    <title>Miembros de la Banda - Skillet</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* Estilos generales */
+        /* --- 1. FUENTES Y ESTILO GENERAL (TEMA ROCKBAND) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Roboto:wght@400;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #0a0a0a;
-            color: #f0f0f0;
+            background-color: #121214; 
+            color: #cccccc;
+            font-family: 'Roboto', sans-serif;
             line-height: 1.6;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        section {
-            padding: 60px 0;
-        }
-        
-        h1, h2, h3 {
-            color: #e10600;
-            margin-bottom: 20px;
-        }
-        
-        p {
-            margin-bottom: 15px;
-        }
-        
-        /* Header */
+
+        /* --- HEADER (Copiado de la tienda) --- */
         header {
-            background-color: #111;
+            background: linear-gradient(to bottom, #5a0b0b, #380202); 
+            border-bottom: 1px solid #7a1515;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
         
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            height: 70px;
         }
         
         .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #e10600;
+            font-family: 'Teko', sans-serif;
+            font-size: 38px;
+            font-weight: 600;
+            color: #e0e0e0;
             text-transform: uppercase;
             letter-spacing: 2px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
         }
         
         .nav-links {
             display: flex;
             list-style: none;
+            height: 100%;
+            align-items: center;
         }
         
         .nav-links li {
-            margin-left: 30px;
+            height: 100%;
+            display: flex;
+            align-items: center;
         }
         
         .nav-links a {
-            color: #f0f0f0;
+            color: #d1d1d1;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+            border-right: 1px solid rgba(255,255,255,0.05);
         }
         
         .nav-links a:hover {
-            color: #e10600;
+            color: #fff;
+            background-color: rgba(0,0,0,0.2);
+            border-bottom: 3px solid #e10600;
         }
 
-        /* Member Detail Section */
-        .member-detail {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        section {
+            padding: 80px 0;
             text-align: center;
-            padding: 50px 0;
-            background-color: #111;
-            min-height: calc(100vh - 100px); /* Ajustar altura para llenar la pantalla */
         }
 
-        .member-detail-img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
+        h2 {
+            font-family: 'Teko', sans-serif;
+            color: #e0e0e0;
+            font-size: 3.5em;
+            margin-bottom: 50px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+            display: inline-block;
+        }
+        
+        /* --- ESTILOS DE LA CUADRÍCULA DE MIEMBROS --- */
+        
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .member-card {
+            background-color: #1a1b1e;
+            padding: 20px;
+            border-top: 5px solid #333;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            text-align: center;
+            position: relative;
             overflow: hidden;
-            margin-bottom: 30px;
-            border: 5px solid #e10600;
-            box-shadow: 0 0 20px rgba(225, 6, 0, 0.5);
         }
 
-        .member-detail-img img {
+        .member-card:hover {
+            transform: translateY(-8px);
+            border-top-color: #e10600;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+        
+        .member-photo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border-radius: 50%; /* Foto redonda */
+            border: 4px solid #e10600; /* Borde rojo */
+            box-shadow: 0 0 10px rgba(225, 6, 0, 0.5);
+            transition: transform 0.5s;
+        }
+        
+        .member-card:hover .member-photo {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .member-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .member-detail-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .member-card h3 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.2em;
+            color: #fff;
+            margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
-        .member-detail-content h2 {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-
-        .member-detail-content h3 {
-            font-size: 1.8em;
-            color: #f0f0f0;
-            margin-bottom: 25px;
-        }
-
-        .member-detail-content p {
+        .member-card p.role {
+            color: #e10600;
+            font-weight: 700;
             font-size: 1.1em;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .back-button {
-            display: inline-block;
-            background-color: #333;
-            color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            margin-top: 30px;
-        }
-
-        .back-button:hover {
-            background-color: #444;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Footer */
-        footer {
-            background-color: #111;
-            padding: 20px 0;
-            text-align: center;
-            border-top: 1px solid #222;
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
         
+        .member-card blockquote {
+            font-style: italic;
+            color: #aaa;
+            font-size: 0.9em;
+            border-left: 3px solid #333;
+            padding-left: 10px;
+            margin: 20px 0;
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: #ccc;
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #e10600;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0a0a0a;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 5px solid #222;
+            margin-top: 80px;
+        }
+
         .copyright {
-            color: #777;
-            font-size: 0.9rem;
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
+                height: auto;
+                padding: 15px 0;
             }
-            
             .nav-links {
-                margin-top: 20px;
+                flex-direction: column;
+                margin-top: 15px;
             }
-            
-            .nav-links li {
-                margin: 0 10px;
-            }
-            
-            .member-detail-img {
-                width: 200px;
-                height: 200px;
-            }
-
-            .member-detail-content h2 {
-                font-size: 2em;
-            }
-
-            .member-detail-content h3 {
-                font-size: 1.4em;
-            }
-
-            .member-detail-content p {
-                font-size: 1em;
+            .nav-links a {
+                border-right: none;
+                border-bottom: 1px solid #333;
+                width: 100%;
+                justify-content: center;
+                padding: 10px;
             }
         }
     </style>
@@ -202,86 +233,85 @@
             <nav class="navbar">
                 <div class="logo">SKILLET</div>
                 <ul class="nav-links">
-                    <li><a href="index.html#about">Inicio</a></li>
-                    <li><a href="index.html#members">Miembros</a></li>
-                    <li><a href="index.html#discography">Discografía</a></li>
-                    <li><a href="index.html#songs">Canciones</a></li>
-                    <li><a href="tienda.html" target="_blank">Tienda</a></li>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="miembros.html">Miembros</a></li>
+                    <li><a href="gira.html">Gira</a></li>
+                    <li><a href="discografia.html">Discografía</a></li>
+                    <li><a href="galeria.html">Galería</a></li> 
+                    <li><a href="tienda.html">Tienda</a></li>
                     <li><a href="index.html#contact">Contacto</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="member-detail">
+    <section id="members">
         <div class="container">
-            <div class="member-detail-img">
-                <img id="member-photo" src="" alt="Foto del Miembro">
+            <h2><i class="fa-solid fa-users-line"></i> La Formación Actual</h2>
+            
+            <div class="members-grid">
+                
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="https://via.placeholder.com/180/7a1515/FFFFFF?text=JOHN+COOPER" alt="Foto de John Cooper">
+                    </div>
+                    <h3>John Cooper</h3>
+                    <p class="role">Voz Principal, Bajo</p>
+                    <blockquote>"We are all a little broken. But broken crayons still color."</blockquote>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="https://via.placeholder.com/180/7a1515/FFFFFF?text=KOREY+COOPER" alt="Foto de Korey Cooper">
+                    </div>
+                    <h3>Korey Cooper</h3>
+                    <p class="role">Guitarra Rítmica, Teclados</p>
+                    <blockquote>"You can't always control what goes on outside. But you can control what goes on inside."</blockquote>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="https://via.placeholder.com/180/7a1515/FFFFFF?text=JEN+LEDGER" alt="Foto de Jen Ledger">
+                    </div>
+                    <h3>Jen Ledger</h3>
+                    <p class="role">Batería, Voz Secundaria</p>
+                    <blockquote>"I love the fact that music can connect people from all over the world."</blockquote>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-photo">
+                        <img src="https://via.placeholder.com/180/7a1515/FFFFFF?text=SETH+MORRISON" alt="Foto de Seth Morrison">
+                    </div>
+                    <h3>Seth Morrison</h3>
+                    <p class="role">Guitarra Solista</p>
+                    <blockquote>"Rock and roll is about finding your voice and letting it be heard."</blockquote>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a>
+                    </div>
+                </div>
+                
             </div>
-            <div class="member-detail-content">
-                <h2 id="member-name"></h2>
-                <h3 id="member-role"></h3>
-                <p id="member-description"></p>
-                <a href="index.html#members" class="back-button">Volver a Miembros</a>
-            </div>
+            
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p class="copyright">&copy; 2025 Skillet Fan Site. Todos los derechos reservados. | Diseñado con pasión.</p>
+            <p class="copyright">© 2025 Skillet Fan Site. Todos los derechos reservados. | Diseñado para el rock.</p>
         </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const memberNameParam = params.get('nombre');
-
-            const membersData = {
-                'JohnCooper': {
-                    name: 'John Cooper',
-                    role: 'Vocalista principal y bajista',
-                    photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbPmU0fxqkDskRmxErgMJp2vrjf2eblI_zKQ&s',
-                    description: 'John Cooper es el fundador y líder de Skillet, conocido por su potente voz y sus letras inspiradoras. Es el principal compositor de la banda y una figura central en su sonido y mensaje. Su energía en el escenario y su carisma han sido clave para el éxito duradero de Skillet. También es el autor del libro "Awake & Alive to Truth".'
-                },
-                'KoreyCooper': {
-                    name: 'Korey Cooper',
-                    role: 'Guitarrista rítmica, tecladista y coros',
-                    photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_BCC2ITPDrAiwBez5kqOEjUX_mqjcg-aZow&s',
-                    description: 'Korey Cooper, esposa de John Cooper, es una multiinstrumentista vital para el sonido de Skillet. Su versatilidad en la guitarra rítmica, los teclados y sus poderosos coros añaden capas y profundidad a las canciones de la banda. También co-escribe gran parte de la música, aportando una perspectiva única y creativa.'
-                },
-                'JenLedger': {
-                    name: 'Jen Ledger',
-                    role: 'Baterista y vocalista de coros',
-                    photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUcaa4w0TpWxe7MIOHGnfQoLz6HZzqJCQetA&s',
-                    description: 'Jen Ledger se unió a Skillet en 2008 y rápidamente se convirtió en una de las favoritas de los fans por su estilo dinámico en la batería y sus distintivos coros, que a menudo toman la delantera en algunas canciones. Su energía en vivo es contagiosa, y también ha lanzado su propia música en solitario, mostrando su talento vocal.'
-                },
-                'SethMorrison': {
-                    name: 'Seth Morrison',
-                    role: 'Guitarrista principal',
-                    photo: 'https://m.media-amazon.com/images/M/MV5BMTYxMTcxOTktYjJhYS00ZWRhLWE4ZWEtYWYxYmYwNjMzM2MxXkEyXkFqcGc@._V1_.jpg',
-                    description: 'Seth Morrison es el talentoso guitarrista principal de Skillet, conocido por sus riffs potentes y solos complejos. Se unió a la banda en 2011 y ha aportado una nueva dimensión al sonido de la guitarra de Skillet, manteniendo la intensidad característica del grupo. Su habilidad técnica y su presencia en el escenario lo hacen un componente esencial de la formación actual.'
-                }
-            };
-
-            const member = membersData[memberNameParam];
-
-            if (member) {
-                document.title = `${member.name} - Skillet`;
-                document.getElementById('member-photo').src = member.photo;
-                document.getElementById('member-name').textContent = member.name;
-                document.getElementById('member-role').textContent = member.role;
-                document.getElementById('member-description').textContent = member.description;
-            } else {
-                // Manejar el caso de un miembro no encontrado
-                document.title = 'Miembro no encontrado';
-                document.getElementById('member-photo').src = 'https://via.placeholder.com/300?text=Miembro+Desconocido';
-                document.getElementById('member-name').textContent = 'Miembro Desconocido';
-                document.getElementById('member-role').textContent = 'Información no disponible';
-                document.getElementById('member-description').textContent = 'Lo sentimos, no pudimos encontrar información sobre este miembro.';
-            }
-        });
-    </script>
 </body>
 </html>
