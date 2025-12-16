@@ -167,24 +167,29 @@
             background-color: #222326;
         }
 
+        /* --- ESTILOS DE IMAGEN CORREGIDOS Y UNIFICADOS --- */
         .product-img-container {
             width: 100%;
-            height: 250px;
+            /* Nueva altura unificada para todas las tarjetas */
+            height: 300px; 
             overflow: hidden;
-            background-color: #fff;
+            /* Fondo blanco para mejor contraste, especialmente con ropa oscura */
+            background-color: #fff; 
             position: relative;
         }
 
         .product-card img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            padding: 10px;
+            /* CLAVE: object-fit: cover recorta la imagen (si es necesario) 
+               para que siempre llene el espacio de 300px x 100% de ancho. */
+            object-fit: cover; 
+            padding: 0; /* Aseguramos que no haya padding para que llene el contenedor */
             transition: transform 0.5s;
         }
 
         .product-card:hover img {
-            transform: scale(1.1);
+            transform: scale(1.05); /* Ligerísimo zoom al pasar el ratón */
         }
 
         .product-info {
@@ -626,14 +631,14 @@
         // 1. DATOS DE PRODUCTOS Y ESTRUCTURA DE CARRITO
         const productos = [
             { id: 1, nombre: "Camiseta 'Dominion' Tour", categoria: "ropa", precio: 25.00, imagen: "Camiste dominion.png" },
-            { id: 2, nombre: "Vinilo 'Victorious' (Limitado)", categoria: "musica", precio: 35.00, imagen: "https://m.media-amazon.com/images/I/81+t0-f6cCL._UF1000,1000_QL80_.jpg" },
-            { id: 3, nombre: "Gorra Logo Skillet", categoria: "accesorios", precio: 15.00, imagen: "https://m.media-amazon.com/images/I/61gXw8t-wmL._AC_SL1001_.jpg" },
-            { id: 4, nombre: "Sudadera 'Monster'", categoria: "ropa", precio: 45.00, imagen: "https://ih1.redbubble.net/image.1054366682.3524/ssrco,classic_tee,mens,101010:01c5ca27c6,front_alt,square_product,600x600.jpg" },
-            { id: 5, nombre: "CD 'Comatose' Deluxe", categoria: "musica", precio: 12.00, imagen: "https://m.media-amazon.com/images/I/81Jd-11+O+L._UF1000,1000_QL80_.jpg" },
-            { id: 6, nombre: "Muñequera de Cuero", categoria: "accesorios", precio: 8.00, imagen: "https://m.media-amazon.com/images/I/71wLpW5JpXL._AC_UL1500_.jpg" },
-            { id: 7, nombre: "Póster Firmado 'Dominion'", categoria: "accesorios", precio: 10.00, imagen: "https://m.media-amazon.com/images/I/71M-j+lH0ZL._AC_SY879_.jpg" },
+            { id: 2, nombre: "Vinilo 'Victorious' (Limitado)", categoria: "musica", precio: 35.00, imagen: "https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/aq0AAOSwydpnisPg/$_12.JPG?set_id=880000500F" },
+            { id: 3, nombre: "Gorra Logo Skillet", categoria: "accesorios", precio: 15.00, imagen: "https://ih1.redbubble.net/image.5600572415.4746/ssrco,baseball_cap,product,161D36:1628f0f39d,front,square,600x600-bg,f8f8f8.jpg" },
+            { id: 4, nombre: "Sudadera 'Monster'", categoria: "ropa", precio: 45.00, imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCd9OI18C7udQ57xEmW7W1UrHmfPtBAq0nbMHZhWXDWA&s" },
+            { id: 5, nombre: "CD 'Comatose' Deluxe", categoria: "musica", precio: 12.00, imagen: "https://gcp-images.merchbar.com/eyJidWNrZXQiOiJtZXJjaGJhci1pbWFnZXMiLCJrZXkiOiJwcm9kdWN0L2NkaWZpZWQvdXBjLzM3LzA3NTY3OTQ1MzcyMy5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEyMDAsImZpdCI6ImNvdmVyIiwiaGVpZ2h0Ijo2MzB9fX0=?format=webp" },
+            { id: 6, nombre: "Muñequera de Cuero", categoria: "accesorios", precio: 8.00, imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfrIZpn4ZzBRSLIj1GJ20pFRlUkJm1n9nMeg&s" },
+            { id: 7, nombre: "Póster Firmado 'Dominion'", categoria: "accesorios", precio: 10.00, imagen: "Poster firmado.png" },
             { id: 8, nombre: "Camiseta 'Feel Invincible'", categoria: "ropa", precio: 22.00, imagen: "https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C61SbdvWq-XL.png%7C0%2C0%2C2140.0%2C2000.0_AC_UX679_.png" },
-            { id: 9, nombre: "CD 'Rise' (Edición Standard)", categoria: "musica", precio: 14.00, imagen: "https://m.media-amazon.com/images/I/91Jc+uYfclL._UF1000,1000_QL80_.jpg" }
+            { id: 9, nombre: "CD 'Rise' (Edición Standard)", categoria: "musica", precio: 14.00, imagen: "https://http2.mlstatic.com/D_NQ_NP_869905-MLA85968577533_062025-O.webp" }
         ];
 
         // 2. LA VARIABLE DEL CARRITO y ELEMENTOS DEL DOM
