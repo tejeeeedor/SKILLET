@@ -1,0 +1,15 @@
+{
+  "productos": [
+    { "id": 1, "nombre": "Camiseta Tour Dominion", "categoria": "ropa", "precio": 25.00, "imagen": "https://m.media-amazon.com/images/I/A13usaonutL._AC_UX679_.png" },
+    { "id": 2, "nombre": "Vinilo Victorious (Red)", "categoria": "musica", "precio": 35.00, "imagen": "https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/aq0AAOSwydpnisPg/$_12.JPG" },
+    { "id": 3, "nombre": "Gorra Logo Skillet", "categoria": "accesorios", "precio": 15.00, "imagen": "https://ih1.redbubble.net/image.5600572415.4746/ssrco,baseball_cap,product,161D36:1628f0f39d,front,square,600x600-bg,f8f8f8.jpg" },
+    { "id": 4, "nombre": "Sudadera Monster", "categoria": "ropa", "precio": 45.00, "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCd9OI18C7udQ57xEmW7W1UrHmfPtBAq0nbMHZhWXDWA&s" },
+    { "id": 5, "nombre": "CD Comatose Deluxe", "categoria": "musica", "precio": 12.00, "imagen": "https://gcp-images.merchbar.com/eyJidWNrZXQiOiJtZXJjaGJhci1pbWFnZXMiLCJrZXkiOiJwcm9kdWN0L2NkaWZpZWQvdXBjLzM3LzA3NTY3OTQ1MzcyMy5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEyMDAsImZpdCI6ImNvdmVyIiwiaGVpZ2h0Ijo2MzB9fX0=?format=webp" },
+    { "id": 6, "nombre": "Muñequera Panhead", "categoria": "accesorios", "precio": 8.00, "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfrIZpn4ZzBRSLIj1GJ20pFRlUkJm1n9nMeg&s" },
+    { "id": 7, "nombre": "Vinilo Rise", "categoria": "musica", "precio": 32.00, "imagen": "https://gcp-images.merchbar.com/eyJidWNrZXQiOiJtZXJjaGJhci1pbWFnZXMiLCJrZXkiOiJwcm9kdWN0L3ZpbnlsaXplZC91cGMvOTcvMDc1Njc4NjY5NzY3LmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTQwMCwiZml0IjoiY292ZXIifX19?format=webp" },
+    { "id": 8, "nombre": "Pack Púas Seth Morrison", "categoria": "accesorios", "precio": 10.00, "imagen": "puas.png" },
+    { "id": 9, "nombre": "Poster Autografiado 'Victorious'", "categoria": "accesorios", "precio": 15.00, "precioAnterior": 30.00, "oferta": true, "imagen": "poster.png" },
+    { "id": 10, "nombre": "Pack Baquetas Jen Ledger", "categoria": "accesorios", "precio": 40.00, "precioAnterior": 60.00, "oferta": true, "imagen": "baquetas.png" },
+    { "id": 11, "nombre": "Sudadera 'Awake' (Vintage)", "categoria": "ropa", "precio": 30.00, "precioAnterior": 55.00, "oferta": true, "imagen": "camisa vintage.png" }
+  ]
+}

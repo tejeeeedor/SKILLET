@@ -15,7 +15,22 @@
             padding: 0;
             box-sizing: border-box;
         }
-    
+    /* Estilo del cuadro de confirmación */
+#mensaje-exito {
+    display: none; /* Escondido por defecto */
+    background-color: #1a1a1a;
+    color: #fff;
+    border: 2px solid #2ecc71; /* Borde verde de éxito */
+    border-left: 8px solid #2ecc71;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Teko', sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.3);
+}
+
         /* 1. TEXTURA DE FONDO (FONDO DE LADRILLO A TODA LA PÁGINA) */
         body {
             background-image: url('https://i.pinimg.com/originals/9d/fb/3f/9dfb3fdca1b4b0e0ea965aa27ff2f049.jpg');
@@ -625,19 +640,20 @@
                 </div>
                 
                 <div class="contact-form-container">
-                    <h3>Envíanos un Mensaje</h3>
-                    <form class="contact-form" action="mailto:info@skilletfansite.com" method="post" enctype="text/plain">
-                        <input type="text" name="name" placeholder="Tu Nombre Completo" required>
-                        <input type="email" name="email" placeholder="Tu Email" required>
-                        <input type="text" name="subject" placeholder="Asunto del Mensaje" required>
-                        <textarea name="body" placeholder="Escribe tu mensaje aquí..." required></textarea>
-                        
-                        <button type="submit">Enviar Mensaje</button>
-                    </form>
-                </div>
-                
-            </div>
-        </div>
+    <h3>Envíanos un Mensaje</h3>
+    <form class="contact-form" id="contactForm">
+        <input type="text" name="name" placeholder="Tu Nombre Completo" required>
+        <input type="email" name="email" placeholder="Tu Email" required>
+        <input type="text" name="subject" placeholder="Asunto del Mensaje" required>
+        <textarea name="body" placeholder="Escribe tu mensaje aquí..." required></textarea>
+        
+        <button type="submit">Enviar Mensaje</button>
+    </form>
+
+    <div id="mensaje-exito">
+        <i class="fa-solid fa-circle-check"></i> Mensaje enviado, gracias por escuchar Skillet
+    </div>
+</div>
     </section>
 
     <footer>
@@ -645,9 +661,31 @@
             <p class="copyright">&copy; 2025 Skillet Fan Site. Todos los derechos reservados. | Diseñado con pasión.</p>
         </div>
     </footer>
+<script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            // 1. Evitamos que la página se recargue o intente enviar un email real
+            event.preventDefault(); 
+            
+            // 2. Ocultamos el formulario
+            this.style.display = 'none';
+            
+            // 3. Mostramos el cuadro de éxito que ya definiste en tu CSS
+            const cuadroExito = document.getElementById('mensaje-exito');
+            cuadroExito.style.display = 'block';
+            
+            // 4. (Opcional) Hacer scroll automático hacia el mensaje para que el usuario lo vea
+            cuadroExito.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // 5. Después de 5 segundos, devolvemos todo a la normalidad por si quieren enviar otro
+            setTimeout(() => {
+                cuadroExito.style.display = 'none';
+                this.style.display = 'flex';
+                this.reset(); // Limpia los campos del formulario
+            }, 5000);
+        });
+    </script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
+
+</body>
 </html>
->>>>>>> 85bc3c50dcc6cd0f87348b3052e8f1c10ffd130f

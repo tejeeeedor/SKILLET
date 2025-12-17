@@ -7,804 +7,271 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- 1. FUENTES Y ESTILO GENERAL (TEMA ROCKBAND) --- */
+        /* --- 1. ESTILOS BASE --- */
         @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Roboto:wght@400;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background-color: #121214; 
-            color: #cccccc;
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #121214; color: #cccccc; font-family: 'Roboto', sans-serif; line-height: 1.6; }
 
         /* --- HEADER --- */
-        header {
-            background: linear-gradient(to bottom, #5a0b0b, #380202); 
-            border-bottom: 1px solid #7a1515;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        header { background: linear-gradient(to bottom, #5a0b0b, #380202); border-bottom: 3px solid #e10600; position: sticky; top: 0; z-index: 1000; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .logo { font-family: 'Teko', sans-serif; font-size: 38px; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 2px; }
+        .nav-links { display: flex; list-style: none; }
+        .nav-links a { color: #d1d1d1; text-decoration: none; font-size: 14px; font-weight: 700; padding: 0 20px; text-transform: uppercase; cursor: pointer; }
+        .nav-links a:hover { color: #fff; border-bottom: 3px solid #e10600; }
+        .cart-count { background: #e10600; color: #fff; border-radius: 50%; padding: 2px 7px; font-size: 0.8em; margin-left: 5px; }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-        
-        .logo {
-            font-family: 'Teko', sans-serif;
-            font-size: 38px;
-            font-weight: 600;
-            color: #e0e0e0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            height: 100%;
-            align-items: center;
-        }
-        
-        .nav-links li {
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
-        
-        .nav-links a {
-            color: #d1d1d1;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 0 20px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s;
-            border-right: 1px solid rgba(255,255,255,0.05);
-            cursor: pointer; /* Añadido cursor pointer */
-        }
-        
-        .nav-links a:hover {
-            color: #fff;
-            background-color: rgba(0,0,0,0.2);
-            border-bottom: 3px solid #e10600;
-        }
-        
-        /* Contador del Carrito */
-        .cart-count {
-            background-color: #e10600;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 7px;
-            font-size: 0.8em;
-            margin-left: 5px;
-            font-weight: 700;
-        }
+        /* --- BUSCADOR Y FILTROS --- */
+        .shop-controls { background: #1a1a1a; padding: 30px; border: 1px solid #333; margin-bottom: 40px; text-align: center; }
+        .search-box { width: 100%; max-width: 400px; padding: 12px; margin-bottom: 20px; background: #0d0d0f; border: 1px solid #e10600; color: white; font-size: 1em; }
+        .filter-btn { background: transparent; color: #ccc; border: 1px solid #444; padding: 8px 20px; margin: 5px; font-family: 'Teko', sans-serif; font-size: 1.3em; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+        .filter-btn.active, .filter-btn:hover { background: #e10600; color: white; border-color: #e10600; }
 
-        section {
-            padding: 50px 0;
-        }
+        /* --- GRID DE PRODUCTOS --- */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
+        .product-card { background: #1a1b1e; border-top: 3px solid #333; transition: 0.3s; display: flex; flex-direction: column; overflow: hidden; }
+        .product-card:hover { transform: translateY(-5px); border-top-color: #e10600; }
+        .product-img-container { width: 100%; height: 280px; background: #fff; }
+        .product-img-container img { width: 100%; height: 100%; object-fit: contain; }
+        .product-info { padding: 20px; text-align: center; flex-grow: 1; }
+        .product-title { font-family: 'Teko', sans-serif; font-size: 1.6em; color: #fff; margin: 10px 0; }
+        .product-price { color: #e10600; font-weight: bold; font-size: 1.3em; margin-bottom: 15px; }
+        .add-btn { width: 100%; padding: 10px; background: #333; color: white; border: none; font-family: 'Teko', sans-serif; font-size: 1.2em; cursor: pointer; transition: 0.3s; }
+        .add-btn:hover { background: #e10600; }
 
-        h2 {
-            font-family: 'Teko', sans-serif;
-            color: #e0e0e0;
-            font-size: 2.8em;
-            margin-bottom: 30px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-        }
+        /* --- MODAL DE ÉXITO --- */
+        #success-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 2000; }
+        .modal-content { background: #1a1b1e; padding: 40px; border-top: 5px solid #e10600; text-align: center; max-width: 450px; }
+        .success-icon { font-size: 60px; color: #2ecc71; margin-bottom: 20px; }
 
-        /* --- ESTILOS ESPECÍFICOS DE LA TIENDA (manteniendo el tema) --- */
-        .filter-container {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-        }
-
-        .filter-btn {
-            background-color: transparent;
-            color: #ccc;
-            border: 1px solid #444;
-            padding: 8px 25px;
-            margin: 5px;
-            font-family: 'Teko', sans-serif;
-            font-size: 1.3em;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.3s;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background-color: #e10600;
-            color: white;
-            border-color: #e10600;
-            box-shadow: 0 0 10px rgba(225, 6, 0, 0.4);
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .product-card {
-            background-color: #1a1b1e;
-            border-top: 3px solid #333;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-top-color: #e10600;
-            background-color: #222326;
-        }
-
-        /* --- ESTILOS DE IMAGEN CORREGIDOS Y UNIFICADOS --- */
-        .product-img-container {
-            width: 100%;
-            /* Nueva altura unificada para todas las tarjetas */
-            height: 300px; 
-            overflow: hidden;
-            /* Fondo blanco para mejor contraste, especialmente con ropa oscura */
-            background-color: #fff; 
-            position: relative;
-        }
-
-        .product-card img {
-            width: 100%;
-            height: 100%;
-            /* CLAVE: object-fit: cover recorta la imagen (si es necesario) 
-               para que siempre llene el espacio de 300px x 100% de ancho. */
-            object-fit: cover; 
-            padding: 0; /* Aseguramos que no haya padding para que llene el contenedor */
-            transition: transform 0.5s;
-        }
-
-        .product-card:hover img {
-            transform: scale(1.05); /* Ligerísimo zoom al pasar el ratón */
-        }
-
-        .product-info {
-            padding: 20px;
-            text-align: center;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-category {
-            color: #e10600;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .product-title {
-            color: #fff;
-            font-family: 'Teko', sans-serif;
-            font-size: 1.6em;
-            margin-bottom: 10px;
-            line-height: 1.1;
-        }
-
-        .product-price {
-            color: #ccc;
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .add-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #333;
-            color: white;
-            border: none;
-            text-transform: uppercase;
-            font-weight: bold;
-            font-family: 'Teko', sans-serif;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .add-btn:hover {
-            background-color: #e10600;
-        }
-        
-        footer {
-            background-color: #0a0a0a;
-            padding: 40px 0;
-            text-align: center;
-            border-top: 5px solid #222;
-            margin-top: 80px;
-        }
-
-        /* --- 3. ESTILOS DEL CARRITO FLOTANTE (Plantilla de Pago) --- */
-        #floating-cart {
-            position: fixed;
-            top: 0;
-            right: -400px; /* Escondido a la derecha */
-            width: 380px;
-            height: 100%;
-            background-color: #1a1a1a;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            padding: 20px;
-            overflow-y: auto;
-            transition: right 0.4s ease-in-out;
-            border-left: 5px solid #e10600;
-        }
-
-        #floating-cart.open {
-            right: 0; /* Visible */
-        }
-        
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #333;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .cart-header h3 {
-            font-family: 'Teko', sans-serif;
-            color: #e10600;
-            font-size: 2em;
-            text-transform: uppercase;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: #ccc;
-            font-size: 1.5em;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-btn:hover {
-            color: #fff;
-        }
-
-        /* Items en el carrito */
-        .cart-item {
-            display: grid;
-            grid-template-columns: 70px 1fr 60px;
-            gap: 10px;
-            padding: 15px 0;
-            border-bottom: 1px dotted #333;
-            align-items: center;
-        }
-
-        .cart-item img {
-            width: 100%;
-            height: 70px;
-            object-fit: contain;
-            border: 1px solid #444;
-        }
-
-        .item-details h4 {
-            color: white;
-            font-size: 1em;
-            margin: 0;
-        }
-
-        .item-details p {
-            color: #e10600;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
-
-        .item-quantity {
-            text-align: right;
-            color: #ccc;
-        }
-        
-        /* Totales y Botón de Pago */
-        .cart-footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid #e10600;
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.5em;
-            font-family: 'Teko', sans-serif;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            padding: 15px;
-            background-color: #e10600;
-            color: white;
-            border: none;
-            text-transform: uppercase;
-            font-size: 1.3em;
-            font-family: 'Teko', sans-serif;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .checkout-btn:hover {
-            background-color: #ff3300;
-        }
-
-
-        /* --- ESTILOS DEL FORMULARIO DE PAGO FINAL --- */
-
-.checkout-section {
-    padding: 80px 0;
-}
-
-.checkout-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr; /* Una columna más ancha para detalles, otra para resumen */
-    gap: 50px;
-    margin-top: 30px;
-}
-
-.checkout-details, .checkout-summary {
-    background-color: #1a1b1e;
-    padding: 30px;
-    border: 1px solid #333;
-    border-top: 3px solid #e10600; /* Borde rojo que indica importancia */
-}
-
-.checkout-details h3, .checkout-summary h3 {
-    font-family: 'Teko', sans-serif;
-    color: #e10600;
-    font-size: 1.8em;
-    margin-bottom: 25px;
-    border-bottom: 1px solid #333;
-    padding-bottom: 10px;
-}
-
-/* Formulario */
-.payment-form {
-    margin-bottom: 30px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    color: #ccc;
-    margin-bottom: 5px;
-    font-size: 0.9em;
-    text-transform: uppercase;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    background-color: #0d0d0f; /* Fondo muy oscuro */
-    border: 1px solid #444;
-    color: #fff;
-    font-size: 1em;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
-}
-
-.form-group-half {
-    display: flex;
-    gap: 20px;
-}
-
-.form-group-half .form-group {
-    flex: 1;
-}
-
-/* Resumen de Pago */
-.payment-summary {
-    padding: 20px;
-    background-color: #0d0d0f;
-    border: 1px solid #444;
-}
-
-.payment-summary h4 {
-    font-family: 'Teko', sans-serif;
-    color: #fff;
-    font-size: 1.5em;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    border-bottom: 1px solid #333;
-    padding-bottom: 10px;
-}
-
-.summary-line {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-    color: #ccc;
-}
-
-.summary-total {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #e10600;
-    border-top: 1px solid #333;
-    margin-top: 10px;
-    padding-top: 10px !important;
-}
-
-.confirm-payment-btn {
-    width: 100%;
-    padding: 15px;
-    margin-top: 20px;
-    background-color: #e10600;
-    color: white;
-    border: none;
-    font-size: 1.4em;
-    font-family: 'Teko', sans-serif;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.confirm-payment-btn:hover {
-    background-color: #ff3300;
-}
-
-/* Responsive para el checkout */
-@media (max-width: 900px) {
-    .checkout-grid {
-        grid-template-columns: 1fr; /* Apilar en pantallas pequeñas */
-    }
-}
+        /* --- OTROS --- */
+        #floating-cart { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: #111; z-index: 1500; padding: 20px; transition: 0.4s; border-left: 5px solid #e10600; }
+        #floating-cart.open { right: 0; }
+        .checkout-section { display: none; padding: 50px 0; }
+        footer { padding: 40px 0; text-align: center; background: #0a0a0a; border-top: 3px solid #222; }
     </style>
 </head>
 <body>
-    
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">SKILLET STORE</div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Volver a la página principal</a></li>
-                    <li><a onclick="toggleCart()">Carrito <i class="fa-solid fa-cart-shopping"></i> <span id="cart-count" class="cart-count">0</span></a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <section>
-        <div class="container">
-            <h2>Merchandising Oficial</h2>
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">SKILLET STORE</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Principal</a></li>
+                <li><a onclick="toggleCart()">Carrito <i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section id="shop-section">
+    <div class="container">
+        <h2>Merchandising Oficial</h2>
+        
+        <div class="shop-controls">
+            <input type="text" id="productSearch" class="search-box" placeholder="Buscar producto (ej: Vinilo, Monster...)" onkeyup="buscarProductos()">
             
             <div class="filter-container">
-                <button class="filter-btn active" onclick="filtrarProductos('todos')">Todos</button>
-                <button class="filter-btn" onclick="filtrarProductos('ropa')">Ropa</button>
-                <button class="filter-btn" onclick="filtrarProductos('musica')">Música</button>
-                <button class="filter-btn" onclick="filtrarProductos('accesorios')">Accesorios</button>
+                <button class="filter-btn active" onclick="filtrarProductos('todos', event)">Todos</button>
+                <button class="filter-btn" onclick="filtrarProductos('ropa', event)">Ropa</button>
+                <button class="filter-btn" onclick="filtrarProductos('musica', event)">Música</button>
+                <button class="filter-btn" onclick="filtrarProductos('accesorios', event)">Accesorios</button>
             </div>
+        </div>
 
-            <div class="products-grid" id="contenedor-productos">
+        <div class="products-grid" id="contenedor-productos"></div>
+    </div>
+</section>
+
+<section id="checkout-form" class="checkout-section">
+    <div class="container">
+        <div style="display: flex; justify-content: center; margin-bottom: 40px; font-family: 'Teko', sans-serif;">
+            <div style="text-align: center; color: #555; padding: 0 20px;">1. CARRITO</div>
+            <div style="color: #e10600; padding: 0 10px;">➔</div>
+            <div style="text-align: center; color: #fff; border-bottom: 2px solid #e10600; padding: 0 20px;">2. PAGO SEGURO</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1.5fr 1fr; gap:30px;">
+            
+            <div>
+                <div style="background:#1a1b1e; padding:30px; border-top:3px solid #e10600; margin-bottom: 20px;">
+                    <h3 style="font-family: 'Teko', sans-serif; font-size: 1.8em; margin-bottom: 15px;"><i class="fa-solid fa-truck"></i> DATOS DE ENVÍO</h3>
+                    <input type="text" placeholder="Nombre completo" required style="width:100%; padding:12px; margin:8px 0; background:#0d0d0f; border:1px solid #333; color:#fff;">
+                    <input type="email" placeholder="Email" required style="width:100%; padding:12px; margin:8px 0; background:#0d0d0f; border:1px solid #333; color:#fff;">
+                    <input type="text" placeholder="Dirección de entrega" required style="width:100%; padding:12px; margin:8px 0; background:#0d0d0f; border:1px solid #333; color:#fff;">
                 </div>
-        </div>
-    </section>
 
-    <div id="floating-cart">
-        <div class="cart-header">
-            <h3>Tu Carrito</h3>
-            <button class="close-btn" onclick="toggleCart()"><i class="fa-solid fa-times"></i></button>
-        </div>
-
-        <div id="cart-items-container">
-            <p id="empty-cart-message">El carrito está vacío. ¡Añade algo de Rock!</p>
-        </div>
-
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cart-total-price">0.00€</span>
+                <div style="background:#1a1b1e; padding:30px; border-top:3px solid #e10600;">
+                    <h3 style="font-family: 'Teko', sans-serif; font-size: 1.8em; margin-bottom: 15px;"><i class="fa-solid fa-credit-card"></i> MÉTODO DE PAGO</h3>
+                    <input type="text" id="card-num" placeholder="Número de tarjeta (16 dígitos)" required pattern="\d{16}" maxlength="16" style="width:100%; padding:12px; margin:8px 0; background:#0d0d0f; border:1px solid #333; color:#fff;">
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/[0-9]{2}" maxlength="5" style="flex:1; padding:12px; background:#0d0d0f; border:1px solid #333; color:#fff;">
+                        <input type="text" placeholder="CVV" required pattern="\d{3}" maxlength="3" style="flex:1; padding:12px; background:#0d0d0f; border:1px solid #333; color:#fff;">
+                    </div>
+                    
+                    <div style="margin-top: 20px; font-size: 1.5em; color: #444; display: flex; gap: 15px;">
+                        <i class="fa-brands fa-cc-visa"></i>
+                        <i class="fa-brands fa-cc-mastercard"></i>
+                        <i class="fa-brands fa-cc-paypal"></i>
+                        <i class="fa-brands fa-cc-apple-pay"></i>
+                    </div>
+                </div>
             </div>
-            <button class="checkout-btn">Proceder al Pago</button>
+
+            <div style="background:#141416; padding:30px; border: 1px solid #333; height: fit-content;">
+                <h3 style="font-family: 'Teko', sans-serif; font-size: 1.8em; border-bottom: 1px solid #333; padding-bottom: 10px;">RESUMEN</h3>
+                
+                <div id="checkout-summary-items" style="margin: 20px 0; max-height: 300px; overflow-y: auto;">
+                    </div>
+
+                <div style="border-top: 1px solid #333; padding-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Subtotal:</span>
+                        <span id="summary-subtotal">0€</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Envío:</span>
+                        <span>5.00€</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 15px; font-weight: bold; font-size: 1.4em; color: #e10600;">
+                        <span>TOTAL:</span>
+                        <span id="final-price-display-checkout">0€</span>
+                    </div>
+                </div>
+
+                <button class="add-btn" style="padding:15px; margin-top:25px; font-size: 1.4em;" onclick="procesarPago()">
+                    FINALIZAR COMPRA
+                </button>
+                <p style="font-size: 0.7em; color: #555; text-align: center; margin-top: 15px;">
+                    <i class="fa-solid fa-lock"></i> Pago encriptado de seguridad 256-bit SSL
+                </p>
+            </div>
+
         </div>
     </div>
+</section>
+<div id="floating-cart">
+    <h3>Tu Carrito</h3>
+    <div id="cart-items-container" style="margin:20px 0;"></div>
+    <button class="add-btn" onclick="goToCheckout()">IR AL PAGO</button>
+    <button class="add-btn" style="background:#444; margin-top:10px;" onclick="toggleCart()">CERRAR</button>
+</div>
 
-    <section id="checkout-form" class="checkout-section" style="display: none;">
-        <div class="container">
-            <h2>Pago Seguro <i class="fa-solid fa-lock"></i></h2>
+<div id="success-modal">
+    <div class="modal-content">
+        <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h3>¡PAGO COMPLETADO!</h3>
+        <p>Gracias por tu compra. Recibirás un email de confirmación.</p>
+        <button class="add-btn" style="margin-top:20px;" onclick="location.reload()">VOLVER A LA TIENDA</button>
+    </div>
+</div>
 
-            <div class="checkout-grid">
-                <div class="checkout-details">
-                    <h3>1. Información de Envío y Contacto</h3>
-                    <form class="payment-form">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" required placeholder="tu.email@ejemplo.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="nombre">Nombre Completo</label>
-                            <input type="text" id="nombre" required placeholder="John Cooper">
-                        </div>
-                        <div class="form-group">
-                            <label for="direccion">Dirección</label>
-                            <input type="text" id="direccion" required placeholder="C/ del Rock, 123">
-                        </div>
-                        <div class="form-group-half">
-                            <div class="form-group">
-                                <label for="ciudad">Ciudad</label>
-                                <input type="text" id="ciudad" required placeholder="Memphis">
-                            </div>
-                            <div class="form-group">
-                                <label for="postal">Código Postal</label>
-                                <input type="text" id="postal" required placeholder="00000">
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<footer><p>© 2025 Skillet Merch. Diseñado para Panheads.</p></footer>
 
-                <div class="checkout-summary">
-                    <h3>2. Detalles de Pago</h3>
-                    <form class="payment-form">
-                        <div class="form-group">
-                            <label for="card-number">Número de Tarjeta</label>
-                            <input type="text" id="card-number" required placeholder="XXXX XXXX XXXX XXXX" maxlength="16">
-                        </div>
-                        <div class="form-group-half">
-                            <div class="form-group">
-                                <label for="expiry">Fecha de Caducidad</label>
-                                <input type="text" id="expiry" required placeholder="MM/AA" maxlength="5">
-                            </div>
-                            <div class="form-group">
-                                <label for="cvv">CVV</label>
-                                <input type="text" id="cvv" required placeholder="123" maxlength="3">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="name-on-card">Nombre en la Tarjeta</label>
-                            <input type="text" id="name-on-card" required>
-                        </div>
-                    </form>
-                    
-                    <div class="payment-summary">
-                        <h4>Resumen del Pedido</h4>
-                        <div class="summary-line">
-                            <span>Subtotal</span>
-                            <span id="summary-subtotal">0.00€</span>
-                        </div>
-                        <div class="summary-line">
-                            <span>Envío</span>
-                            <span id="summary-shipping">5.00€</span>
-                        </div>
-                        <div class="summary-line summary-total">
-                            <span>Total Final</span>
-                            <span id="summary-final-total">0.00€</span>
-                        </div>
-                        <button class="confirm-payment-btn" onclick="alert('¡Pago Simulado Exitoso! Gracias por tu compra.')">
-                            Pagar <span id="payment-amount">0.00€</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<script>
+        let productos = []; 
+        let carrito = [];
 
-    <footer>
-        <div class="container">
-            <p>© 2025 Skillet Shop. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+        // 1. CARGA DE DATOS DESDE EL JSON
+        async function cargarBaseDeDatos() {
+            try {
+                const respuesta = await fetch('productos.json'); 
+                if (!respuesta.ok) throw new Error("No se pudo encontrar el archivo JSON");
+                const datos = await respuesta.json();
+                productos = datos.productos; 
+                mostrarProductos(productos); 
+            } catch (error) {
+                console.error("Error crítico:", error);
+                alert("Error al cargar productos. Revisa que el archivo productos.json no tenga errores de comas.");
+            }
+        }
 
-    <script>
-        // 1. DATOS DE PRODUCTOS Y ESTRUCTURA DE CARRITO
-        const productos = [
-            { id: 1, nombre: "Camiseta 'Dominion' Tour", categoria: "ropa", precio: 25.00, imagen: "Camiste dominion.png" },
-            { id: 2, nombre: "Vinilo 'Victorious' (Limitado)", categoria: "musica", precio: 35.00, imagen: "https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/aq0AAOSwydpnisPg/$_12.JPG?set_id=880000500F" },
-            { id: 3, nombre: "Gorra Logo Skillet", categoria: "accesorios", precio: 15.00, imagen: "https://ih1.redbubble.net/image.5600572415.4746/ssrco,baseball_cap,product,161D36:1628f0f39d,front,square,600x600-bg,f8f8f8.jpg" },
-            { id: 4, nombre: "Sudadera 'Monster'", categoria: "ropa", precio: 45.00, imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCd9OI18C7udQ57xEmW7W1UrHmfPtBAq0nbMHZhWXDWA&s" },
-            { id: 5, nombre: "CD 'Comatose' Deluxe", categoria: "musica", precio: 12.00, imagen: "https://gcp-images.merchbar.com/eyJidWNrZXQiOiJtZXJjaGJhci1pbWFnZXMiLCJrZXkiOiJwcm9kdWN0L2NkaWZpZWQvdXBjLzM3LzA3NTY3OTQ1MzcyMy5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEyMDAsImZpdCI6ImNvdmVyIiwiaGVpZ2h0Ijo2MzB9fX0=?format=webp" },
-            { id: 6, nombre: "Muñequera de Cuero", categoria: "accesorios", precio: 8.00, imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfrIZpn4ZzBRSLIj1GJ20pFRlUkJm1n9nMeg&s" },
-            { id: 7, nombre: "Póster Firmado 'Dominion'", categoria: "accesorios", precio: 10.00, imagen: "Poster firmado.png" },
-            { id: 8, nombre: "Camiseta 'Feel Invincible'", categoria: "ropa", precio: 22.00, imagen: "https://m.media-amazon.com/images/I/A13usaonutL._CLa%7C2140%2C2000%7C61SbdvWq-XL.png%7C0%2C0%2C2140.0%2C2000.0_AC_UX679_.png" },
-            { id: 9, nombre: "CD 'Rise' (Edición Standard)", categoria: "musica", precio: 14.00, imagen: "https://http2.mlstatic.com/D_NQ_NP_869905-MLA85968577533_062025-O.webp" }
-        ];
-
-        // 2. LA VARIABLE DEL CARRITO y ELEMENTOS DEL DOM
-        let cart = []; 
-
-        const contenedor = document.getElementById('contenedor-productos');
-        const cartContainer = document.getElementById('cart-items-container');
-        const cartCountDisplay = document.getElementById('cart-count');
-        const cartTotalDisplay = document.getElementById('cart-total-price');
-        const mainSection = document.querySelector('section:not(#checkout-form)');
-        const checkoutForm = document.getElementById('checkout-form');
-        const checkoutBtnInCart = document.querySelector('.checkout-btn');
-
-
-        // 3. FUNCIÓN PARA DIBUJAR LOS PRODUCTOS EN LA TIENDA
-        function mostrarProductos(listaProductos) {
+        // 2. MOSTRAR PRODUCTOS (Con lógica de Ofertas)
+        function mostrarProductos(lista) {
+            const contenedor = document.getElementById('contenedor-productos');
             contenedor.innerHTML = '';
-            listaProductos.forEach(producto => {
-                const html = `
+            lista.forEach(p => {
+                // Si el producto tiene 'oferta: true', creamos el HTML del precio tachado
+                const precioViejoHTML = p.oferta ? `<span style="text-decoration: line-through; color: #777; font-size: 0.8em; margin-right: 10px;">${p.precioAnterior.toFixed(2)}€</span>` : '';
+                
+                contenedor.innerHTML += `
                     <div class="product-card">
-                        <div class="product-img-container">
-                            <img src="${producto.imagen}" alt="${producto.nombre}">
-                        </div>
+                        <div class="product-img-container"><img src="${p.imagen}"></div>
                         <div class="product-info">
-                            <div>
-                                <p class="product-category">${producto.categoria}</p>
-                                <h3 class="product-title">${producto.nombre}</h3>
-                            </div>
-                            <div>
-                                <p class="product-price">${producto.precio.toFixed(2)}€</p>
-                                <button class="add-btn" onclick="addProductToCart(${producto.id})">
-                                    Añadir <i class="fa-solid fa-plus"></i>
-                                </button>
-                            </div>
+                            <p style="color:#e10600; font-size:0.8em; text-transform:uppercase;">${p.categoria}</p>
+                            <h3 class="product-title">${p.nombre}</h3>
+                            <p class="product-price">
+                                ${precioViejoHTML}
+                                ${p.precio.toFixed(2)}€
+                            </p>
+                            <button class="add-btn" onclick="agregarAlCarrito(${p.id})">AGREGAR</button>
                         </div>
-                    </div>
-                `;
-                contenedor.innerHTML += html;
+                    </div>`;
             });
         }
 
-        // 4. FUNCIÓN PARA ABRIR Y CERRAR EL CARRITO
-        function toggleCart() {
-            document.getElementById('floating-cart').classList.toggle('open');
-        }
+        // 3. FILTRAR PRODUCTOS (Incluye categoría de Ofertas)
+        function filtrarProductos(cat, e) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
 
-        // 5. FUNCIÓN CENTRAL: AÑADIR PRODUCTO AL CARRITO
-        function addProductToCart(productId) {
-            const productoEncontrado = productos.find(p => p.id === productId);
-            const itemEnCarrito = cart.find(item => item.id === productId);
-
-            if (itemEnCarrito) {
-                itemEnCarrito.cantidad += 1;
-            } else {
-                cart.push({
-                    id: productoEncontrado.id,
-                    nombre: productoEncontrado.nombre,
-                    precio: productoEncontrado.precio,
-                    imagen: productoEncontrado.imagen,
-                    cantidad: 1
-                });
-            }
-
-            // Actualizar la vista del carrito
-            renderCart();
-            
-            // Opcional: Abrir el carrito automáticamente al añadir
-            if (!document.getElementById('floating-cart').classList.contains('open')) {
-                toggleCart();
-            }
-            
-            // Si el formulario de pago está visible, se oculta para obligar a pasar por el carrito.
-            if (checkoutForm.style.display !== 'none') {
-                mainSection.style.display = 'block';
-                checkoutForm.style.display = 'none';
-            }
-        }
-
-        // 6. FUNCIÓN PARA DIBUJAR LOS PRODUCTOS DENTRO DEL CARRITO Y ACTUALIZAR TOTALES
-        function renderCart() {
-            let total = 0;
-            let totalItems = 0;
-            cartContainer.innerHTML = ''; 
-
-            if (cart.length === 0) {
-                cartContainer.innerHTML = '<p id="empty-cart-message">El carrito está vacío. ¡Añade algo de Rock!</p>';
-                checkoutBtnInCart.disabled = true; // Desactivar pago si está vacío
-            } else {
-                checkoutBtnInCart.disabled = false; // Activar pago
-                cart.forEach(item => {
-                    const subtotal = item.precio * item.cantidad;
-                    total += subtotal;
-                    totalItems += item.cantidad;
-
-                    const itemHtml = `
-                        <div class="cart-item">
-                            <img src="${item.imagen}" alt="${item.nombre}">
-                            <div class="item-details">
-                                <h4>${item.nombre}</h4>
-                                <p>${item.precio.toFixed(2)}€ x ${item.cantidad}</p>
-                            </div>
-                            <div class="item-quantity">
-                                <strong>${subtotal.toFixed(2)}€</strong>
-                            </div>
-                        </div>
-                    `;
-                    cartContainer.innerHTML += itemHtml;
-                });
-            }
-
-            // Actualizar el contador en el Header y el Total final del CARRITO FLOTANTE
-            cartCountDisplay.textContent = totalItems;
-            cartTotalDisplay.textContent = total.toFixed(2) + '€';
-
-            // Actualizar el Resumen del formulario de Pago Final (para cuando se abra)
-            const envio = 5.00;
-            const totalConEnvio = total + envio; 
-            document.getElementById('summary-subtotal').textContent = total.toFixed(2) + '€';
-            document.getElementById('summary-shipping').textContent = envio.toFixed(2) + '€';
-            document.getElementById('summary-final-total').textContent = totalConEnvio.toFixed(2) + '€';
-            document.getElementById('payment-amount').textContent = totalConEnvio.toFixed(2) + '€';
-        }
-
-
-        // 7. FUNCIÓN PARA PASAR DEL CARRITO FLOTANTE AL FORMULARIO DE PAGO
-        function goToCheckout() {
-            if (cart.length === 0) return; // Evitar ir al pago si el carrito está vacío
-
-            // 1. Cierra el carrito flotante
-            toggleCart(); 
-            // 2. Oculta la lista de productos principal (la tienda)
-            mainSection.style.display = 'none'; 
-            // 3. Muestra el formulario de pago final
-            checkoutForm.style.display = 'block';
-
-            // Volvemos arriba de la página
-            window.scrollTo(0, 0); 
-        }
-
-        // 8. FUNCIÓN DE FILTRADO (La misma que antes)
-        function filtrarProductos(categoria) {
-            const botones = document.querySelectorAll('.filter-btn');
-            botones.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            if (categoria === 'todos') {
+            if (cat === 'todos') {
                 mostrarProductos(productos);
+            } else if (cat === 'ofertas') {
+                const enOferta = productos.filter(p => p.oferta === true);
+                mostrarProductos(enOferta);
             } else {
-                const filtrados = productos.filter(p => p.categoria === categoria);
-                mostrarProductos(filtrados);
+                mostrarProductos(productos.filter(p => p.categoria === cat));
             }
-            
-            // Asegurarse de que si filtramos, el formulario de pago no está visible
-            mainSection.style.display = 'block';
-            checkoutForm.style.display = 'none';
-            window.scrollTo(0, 0);
         }
-        
-        // Conectar el botón de "Proceder al Pago" en el carrito al JavaScript
-        checkoutBtnInCart.addEventListener('click', goToCheckout);
 
+        // 4. BÚSQUEDA
+        function buscarProductos() {
+            const busqueda = document.getElementById('productSearch').value.toLowerCase();
+            const filtrados = productos.filter(p => p.nombre.toLowerCase().includes(busqueda));
+            mostrarProductos(filtrados);
+        }
 
-        // 9. INICIAR LA PÁGINA
-        mostrarProductos(productos);
-        renderCart(); 
+        // 5. GESTIÓN DEL CARRITO
+        function toggleCart() { document.getElementById('floating-cart').classList.toggle('open'); }
 
+        function agregarAlCarrito(id) {
+            const p = productos.find(x => x.id === id);
+            carrito.push(p);
+            document.getElementById('cart-count').textContent = carrito.length;
+            renderCarrito();
+            if(!document.getElementById('floating-cart').classList.contains('open')) toggleCart();
+        }
+
+        function renderCarrito() {
+            const cont = document.getElementById('cart-items-container');
+            let total = 0;
+            cont.innerHTML = '';
+            carrito.forEach(p => {
+                total += p.precio;
+                cont.innerHTML += `<p style="color:white; margin-bottom:5px; font-size:0.9em;">${p.nombre} - ${p.precio.toFixed(2)}€</p>`;
+            });
+            document.getElementById('final-price-display').textContent = (total + 5).toFixed(2) + '€';
+        }
+
+        function goToCheckout() {
+            if(carrito.length === 0) return alert("El carrito está vacío");
+            toggleCart();
+            document.getElementById('shop-section').style.display = 'none';
+            document.getElementById('checkout-form').style.display = 'block';
+        }
+
+        function procesarPago() {
+            const inputs = document.querySelectorAll('#checkout-form input[required]');
+            let ok = true;
+            inputs.forEach(i => { if(!i.checkValidity()) { i.reportValidity(); ok = false; } });
+            if(ok) document.getElementById('success-modal').style.display = 'flex';
+        }
+
+        // INICIALIZACIÓN
+        cargarBaseDeDatos();
     </script>
 </body>
 </html>
