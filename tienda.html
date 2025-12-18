@@ -50,6 +50,17 @@
         #floating-cart.open { right: 0; }
         .checkout-section { display: none; padding: 50px 0; }
         footer { padding: 40px 0; text-align: center; background: #0a0a0a; border-top: 3px solid #222; }
+
+        /* NUEVO: ESTILO PARA BOTÓN ELIMINAR */
+        .btn-remove {
+            background: transparent;
+            border: none;
+            color: #ff4d4d;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        .btn-remove:hover { color: #fff; }
     </style>
 </head>
 <body>
@@ -155,6 +166,7 @@
 <div id="floating-cart">
     <h3>Tu Carrito</h3>
     <div id="cart-items-container" style="margin:20px 0;"></div>
+    <h4 style="color:white; margin-bottom:10px;">Subtotal: <span id="cart-floating-total">0.00€</span></h4>
     <button class="add-btn" onclick="goToCheckout()">IR AL PAGO</button>
     <button class="add-btn" style="background:#444; margin-top:10px;" onclick="toggleCart()">CERRAR</button>
 </div>
@@ -184,16 +196,20 @@
                 mostrarProductos(productos); 
             } catch (error) {
                 console.error("Error crítico:", error);
-                alert("Error al cargar productos. Revisa que el archivo productos.json no tenga errores de comas.");
+                // Si falla el JSON, cargamos unos de respaldo para que no se vea vacío
+                productos = [
+                    {id:1, nombre:"Camiseta Dominion", categoria:"ropa", precio:25, imagen:"https://m.media-amazon.com/images/I/A13usaonutL._AC_UX679_.png"},
+                    {id:2, nombre:"Vinilo Victorious", categoria:"musica", precio:35, imagen:"https://i.ebayimg.com/00/s/MTYwMFgxMjAw/z/aq0AAOSwydpnisPg/$_12.JPG"}
+                ];
+                mostrarProductos(productos);
             }
         }
 
-        // 2. MOSTRAR PRODUCTOS (Con lógica de Ofertas)
+        // 2. MOSTRAR PRODUCTOS
         function mostrarProductos(lista) {
             const contenedor = document.getElementById('contenedor-productos');
             contenedor.innerHTML = '';
             lista.forEach(p => {
-                // Si el producto tiene 'oferta: true', creamos el HTML del precio tachado
                 const precioViejoHTML = p.oferta ? `<span style="text-decoration: line-through; color: #777; font-size: 0.8em; margin-right: 10px;">${p.precioAnterior.toFixed(2)}€</span>` : '';
                 
                 contenedor.innerHTML += `
@@ -212,7 +228,7 @@
             });
         }
 
-        // 3. FILTRAR PRODUCTOS (Incluye categoría de Ofertas)
+        // 3. FILTRAR PRODUCTOS
         function filtrarProductos(cat, e) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             e.target.classList.add('active');
@@ -220,8 +236,7 @@
             if (cat === 'todos') {
                 mostrarProductos(productos);
             } else if (cat === 'ofertas') {
-                const enOferta = productos.filter(p => p.oferta === true);
-                mostrarProductos(enOferta);
+                mostrarProductos(productos.filter(p => p.oferta === true));
             } else {
                 mostrarProductos(productos.filter(p => p.categoria === cat));
             }
@@ -240,20 +255,51 @@
         function agregarAlCarrito(id) {
             const p = productos.find(x => x.id === id);
             carrito.push(p);
-            document.getElementById('cart-count').textContent = carrito.length;
-            renderCarrito();
+            actualizarUI();
             if(!document.getElementById('floating-cart').classList.contains('open')) toggleCart();
         }
 
-        function renderCarrito() {
+        // NUEVO: FUNCIÓN PARA ELIMINAR PRODUCTOS
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1); // Quita 1 elemento en esa posición
+            actualizarUI();
+        }
+
+        // NUEVO: CENTRALIZAR ACTUALIZACIÓN DE INTERFAZ
+        function actualizarUI() {
             const cont = document.getElementById('cart-items-container');
+            const summaryCont = document.getElementById('checkout-summary-items');
             let total = 0;
+            
+            document.getElementById('cart-count').textContent = carrito.length;
             cont.innerHTML = '';
-            carrito.forEach(p => {
+            if(summaryCont) summaryCont.innerHTML = '';
+
+            carrito.forEach((p, index) => {
                 total += p.precio;
-                cont.innerHTML += `<p style="color:white; margin-bottom:5px; font-size:0.9em;">${p.nombre} - ${p.precio.toFixed(2)}€</p>`;
+                
+                // HTML para el carrito flotante con botón de eliminar
+                cont.innerHTML += `
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <p style="color:white; font-size:0.9em; margin:0;">${p.nombre} - ${p.precio.toFixed(2)}€</p>
+                        <button class="btn-remove" onclick="eliminarDelCarrito(${index})"><i class="fa-solid fa-trash"></i></button>
+                    </div>`;
+
+                // HTML para el resumen del checkout
+                if(summaryCont) {
+                    summaryCont.innerHTML += `<p style="font-size:0.9em; display:flex; justify-content:space-between;"><span>${p.nombre}</span> <span>${p.precio.toFixed(2)}€</span></p>`;
+                }
             });
-            document.getElementById('final-price-display').textContent = (total + 5).toFixed(2) + '€';
+
+            // Actualizar todos los precios
+            const subtotalStr = total.toFixed(2) + '€';
+            const finalStr = (total + 5).toFixed(2) + '€';
+
+            document.getElementById('cart-floating-total').textContent = subtotalStr;
+            if(document.getElementById('summary-subtotal')) {
+                document.getElementById('summary-subtotal').textContent = subtotalStr;
+                document.getElementById('final-price-display-checkout').textContent = finalStr;
+            }
         }
 
         function goToCheckout() {
@@ -261,6 +307,7 @@
             toggleCart();
             document.getElementById('shop-section').style.display = 'none';
             document.getElementById('checkout-form').style.display = 'block';
+            actualizarUI(); // Refrescar el resumen al entrar
         }
 
         function procesarPago() {
@@ -270,7 +317,6 @@
             if(ok) document.getElementById('success-modal').style.display = 'flex';
         }
 
-        // INICIALIZACIÓN
         cargarBaseDeDatos();
     </script>
 </body>
